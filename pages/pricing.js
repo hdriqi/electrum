@@ -38,11 +38,11 @@ const Pricing = () => {
       <div className="relative">
         <div className="absolute inset-0 w-full bg-primary-green z-10"></div>
         <div className="max-w-3xl m-auto px-3 py-16 relative z-10">
-          <h2 className="text-lg lg:text-3xl text-white text-center font-bold">Kualitas terbaik dengan harga terjangkau.</h2>
+          <h2 className="text-3xl text-white text-center font-bold">Kualitas terbaik dengan harga terjangkau.</h2>
         </div>
       </div>
-      <div className="max-w-5xl m-auto rounded-md py-16 px-4">
-        <div className="flex flex-wrap -mx-3">
+      <div className="max-w-5xl m-auto rounded-md py-16 overflow-hidden">
+        <div className="flex flex-wrap -mx-3 px-4">
           <div className="w-full lg:w-1/2 mt-2 px-3">
             <label className="block">Jenjang</label>
             <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
@@ -52,8 +52,8 @@ const Pricing = () => {
             <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
           </div>
         </div>
-        <div className="overflow-x-auto mt-8">
-          <table className="min-w-full">
+        <div className="overflow-x-auto mt-8 pl-4 lg:px-4">
+          <table>
             <tr>
               <th rowSpan="2" className="p-2">Paket</th>
               <th className="bg-green-100 p-2" colSpan={pricing[0].list[0].price.length}>Jumlah Anak</th>

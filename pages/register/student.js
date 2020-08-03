@@ -107,7 +107,7 @@ const RegisterStudent = () => {
               <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
             </div>
             <div className="flex mt-8">
-            <button onClick={_ => setStep(1)} className="text-lg border px-4 py-2 rounded-md w-full">Periksa Kembali</button>
+            <button onClick={_ => setStep(1)} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Selanjutnya</button>
             </div>
           </div>
         )

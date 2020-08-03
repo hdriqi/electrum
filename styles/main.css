@@ -5,4 +5,9 @@ input {
   @apply p-2 rounded-md outline-none;
 }
 
+th, td {
+  @apply border;
+  min-width: 120px;
+}
+
 @tailwind utilities;

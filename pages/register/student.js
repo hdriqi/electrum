@@ -26,7 +26,7 @@ const RegisterStudent = () => {
       </div>
       {
         step === 0 && (
-          <div className="max-w-3xl m-auto bg-white rounded-md py-16 px-16">
+          <div className="max-w-3xl m-auto bg-white rounded-md py-16 px-4">
             <div className="border-b border-gray-300 pb-2">
               <h4 className="text-2xl font-bold">Data Diri</h4>
             </div>
@@ -114,7 +114,7 @@ const RegisterStudent = () => {
       }
       {
         step === 1 && (
-          <div className="max-w-3xl m-auto bg-white rounded-md py-16 px-16">
+          <div className="max-w-3xl m-auto bg-white rounded-md py-16 px-4">
             <div className="border-b border-gray-300 pb-2">
               <h4 className="text-2xl font-bold">Data Program</h4>
             </div>

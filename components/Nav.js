@@ -1,6 +1,6 @@
 const Nav = () => {
   return (
-    <div className="sticky top-0 bg-white">
+    <div className="sticky top-0 bg-white z-50">
       <div className="max-w-6xl m-auto flex items-center justify-between px-4 py-2">
         <div>
           Logo

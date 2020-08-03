@@ -75,15 +75,21 @@ export default function Home() {
             {
               about.teams.map((team, idx) => {
                 return (
-                  <div className="w-full md:w-1/2 lg:w-1/4 px-3 pt-8" key={idx}>
-                    <div className="relative overflow-hidden" style={{
-                      paddingBottom: `100%`
-                    }}>
-                      <img className="absolute inset-0 object-cover" src={team.img} />
+                  <div className="w-full lg:w-1/4 px-3 pt-8" key={idx}>
+                    <div className="flex items-center lg:flex-col -mx-3">
+                      <div className="px-3 w-full">
+                        <div className="w-full relative overflow-hidden" style={{
+                          paddingBottom: `100%`
+                        }}>
+                          <img className="absolute inset-0 object-cover" src={team.img} />
+                        </div>
+                      </div>
+                      <div className="px-3">
+                        <h4 className="text-lg font-semibold">{team.name}</h4>
+                        <h4 className="text-sm font-semibold mt-2">{team.position}</h4>
+                        <p className="mt-4">{team.desc}</p>
+                      </div>
                     </div>
-                    <h4 className="text-lg font-semibold">{team.name}</h4>
-                    <h4 className="text-sm font-semibold mt-2">{team.position}</h4>
-                    <p className="mt-4">{team.desc}</p>
                   </div>
                 )
               })

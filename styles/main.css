@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 
-
+input {
+  @apply p-2 rounded-md outline-none;
+}
 
 @tailwind utilities;

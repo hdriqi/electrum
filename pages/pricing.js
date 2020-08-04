@@ -65,7 +65,7 @@ const pricing = [
     ]
   },
   {
-    level: 'SMA',
+    level: 'SMP',
     class: '9',
     list: [
       {
@@ -185,7 +185,10 @@ const Pricing = () => {
                     {
                       pkg.price.map(price => {
                         return (
-                          <td className="text-center p-2">{price}</td>
+                          <td className="text-center text-sm p-2">{price.toLocaleString('ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                          })}</td>
                         )
                       })
                     }

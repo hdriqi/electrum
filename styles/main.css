@@ -10,4 +10,8 @@ th, td {
   min-width: 120px;
 }
 
+.carousel-peek .carousel__slider {
+  overflow: visible;
+}
+
 @tailwind utilities;

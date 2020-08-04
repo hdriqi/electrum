@@ -34,16 +34,16 @@ const Footer = () => {
               <Link href="/blog">
                 <a>Berita dan Event</a>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about">
                 <a className="mt-1">Tentang Kami</a>
               </Link>
-              <Link href="/about-us">
+              <Link href="/register/student">
                 <a className="mt-1">Pendaftaran Siswa</a>
               </Link>
-              <Link href="/about-us">
+              <Link href="/register/tutor">
                 <a className="mt-1">Pendaftaran Tutor</a>
               </Link>
-              <Link href="/about-us">
+              <Link href="/faq">
                 <a className="mt-1">FAQ</a>
               </Link>
             </div>

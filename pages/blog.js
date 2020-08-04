@@ -1,5 +1,5 @@
 import Nav from '../components/Nav'
-import { useState } from 'react'
+import Footer from '../components/Footer'
 
 const posts = [
   {
@@ -35,8 +35,6 @@ const posts = [
 ]
 
 const PostItem = ({ post }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
     <div className="w-full lg:w-1/3 px-3 overflow-hidden mt-6" style={{
       height: `400px`
@@ -82,6 +80,7 @@ const Blog = () => {
           }
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

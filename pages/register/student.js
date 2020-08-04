@@ -5,14 +5,98 @@ import ReactDropdown from 'react-dropdown'
 import { province, city } from '../../utils/common'
 import InputSchedule from '../../components/InputSchedule'
 
+const default_subjects = [
+  'Calistung',
+  'Matematika SD',
+  'IPA SD',
+  'IPS SD',
+  'Matematika SMP',
+  'IPA SMP',
+  'Matematika SMA',
+  'Fisika SMA',
+  'Kimia SMA',
+  'Biologi SMA',
+]
+
 const RegisterStudent = () => {
   const [step, setStep] = useState(0)
+  const [form, setForm] = useState({
+    fullname: '',
+    class: '',
+    schoolName: '',
+    stuPhoneNumber: '',
+    stuEmail: '',
+    parentTitle: '',
+    parentFullname: '',
+    parentPhoneNumber: '',
+    parentEmail: '',
+    addressProvince: '',
+    addressCity: '',
+    addressDetail: '',
+    tutorNote: '',
+    package: ''
+  })
+  const [chosenSubject, setChosenSubject] = useState([])
   const [additionalStudents, setAdditionalStudents] = useState([])
+  const [tutorPreference, setTutorPreference] = useState([])
   const [schedules, setSchedules] = useState([{}, {}, {}])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [step])
+
+  const _submit = () => {
+    console.log(form)
+    console.log(additionalStudents)
+    console.log(chosenSubject)
+    console.log(schedules)
+  }
+
+  const updateForm = (key, value) => {
+    const clone = { ...form }
+    clone[key] = value
+    setForm(clone)
+  }
+
+  const checkTutorPref = (data) => {
+    const findIdx = tutorPreference.findIndex(area => area === data)
+    if (findIdx > -1) {
+      return true
+    }
+    return false
+  }
+
+  const toggleTutorPref = (data) => {
+    const clone = [...tutorPreference]
+    const findIdx = tutorPreference.findIndex(area => area === data)
+    if (findIdx > -1) {
+      clone.splice(findIdx, 1)
+    }
+    else {
+      clone.push(data)
+    }
+    setTutorPreference(clone)
+  }
+
+  const checkChosenSubject = (data) => {
+    const findIdx = chosenSubject.findIndex(area => area === data)
+    if (findIdx > -1) {
+      return true
+    }
+    return false
+  }
+
+  const toggleChosenSubject = (data) => {
+    const clone = [...chosenSubject]
+    const findIdx = chosenSubject.findIndex(area => area === data)
+    if (findIdx > -1) {
+      clone.splice(findIdx, 1)
+    }
+    else {
+      clone.push(data)
+    }
+    setChosenSubject(clone)
+  }
 
   const updateAdditionalStudents = (idx, data) => {
     const clone = [...additionalStudents]
@@ -82,7 +166,7 @@ const RegisterStudent = () => {
             </div>
             <div className="mt-3">
               <label className="block">Nama Lengkap</label>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+              <input type="text" value={form.fullname} onInput={e => updateForm('fullname', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
             </div>
             {
               additionalStudents.map((student, idx) => {
@@ -114,27 +198,27 @@ const RegisterStudent = () => {
               <div className="w-full mt-3 px-3">
                 <label className="block">Kelas</label>
                 <ReactDropdown options={[
-                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
-                ]} placeholder="Kelas" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                  '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
+                ]} value={form.class} onChange={opt => updateForm('class', opt.value)} placeholder="Kelas" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
             </div>
             <div className="mt-3">
               <label className="block">Nama Sekolah</label>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+              <input type="text" value={form.schoolName} onInput={e => updateForm('schoolName', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
             </div>
             <div className="mt-3">
               <div className="flex">
                 <label className="block">Nomor HP Siswa</label>
                 <p className="text-gray-600 pl-2">(Opsional)</p>
               </div>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" placeholder="081234567890" />
+              <input type="text" value={form.stuPhoneNumber} onInput={e => updateForm('stuPhoneNumber', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" placeholder="081234567890" />
             </div>
             <div className="mt-3">
               <div className="flex">
                 <label className="block">Email Siswa</label>
                 <p className="text-gray-600 pl-2">(Opsional)</p>
               </div>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+              <input type="text" value={form.stuEmail} onInput={e => updateForm('stuEmail', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
             </div>
             <div className="mt-8">
               <h4 className="text-xl font-bold">Identitas Orang Tua</h4>
@@ -144,23 +228,23 @@ const RegisterStudent = () => {
                 <label className="block">Gelar</label>
                 <ReactDropdown options={[
                   'Ny.', 'Tn.', 'Ibu', 'Bpk.'
-                ]} placeholder="Pilih Gelar" controlClassName="truncate w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                ]} value={form.parentTitle} onChange={opt => updateForm('parentTitle', opt.value)} placeholder="Pilih Gelar" controlClassName="truncate w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
               <div className="w-3/4 mt-3 px-3">
                 <label className="block">Nama Lengkap</label>
-                <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+                <input type="text" value={form.parentFullname} onInput={e => updateForm('parentFullname', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
               </div>
             </div>
             <div className="mt-3">
               <label className="block">Nomor HP Orang Tua</label>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+              <input type="text" value={form.parentPhoneNumber} onInput={e => updateForm('parentPhoneNumber', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
             </div>
             <div className="mt-3">
               <div className="flex">
                 <label className="block">Email Orang Tua</label>
                 <p className="text-gray-600 pl-2">(Opsional)</p>
               </div>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+              <input type="text" value={form.parentEmail} onInput={e => updateForm('parentEmail', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
             </div>
             <div className="mt-8">
               <h4 className="text-xl font-bold">Alamat</h4>
@@ -168,16 +252,16 @@ const RegisterStudent = () => {
             <div className="flex flex-wrap -mx-3">
               <div className="w-full lg:w-1/2 mt-3 px-3">
                 <label className="block">Provinsi</label>
-                <ReactDropdown options={province} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                <ReactDropdown value={form.addressProvince} onChange={opt => updateForm('addressProvince', opt.value)} options={province} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
               <div className="w-full lg:w-1/2 mt-3 px-3">
                 <label className="block">Kabupaten/Kota</label>
-                <ReactDropdown options={city} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                <ReactDropdown value={form.addressCity} onChange={opt => updateForm('addressCity', opt.value)} options={city} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
             </div>
             <div className="mt-3">
               <label className="block">Alamat Lengkap</label>
-              <input type="text" className="w-full mt-2 bg-gray-200 px-3" placeholder="Tulis alamat lengkap: Jalan, Kelurahan, Kecamatan, dsb" />
+              <input type="text" value={form.addressDetail} onInput={e => updateForm('addressDetail', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" placeholder="Tulis alamat lengkap: Jalan, Kelurahan, Kecamatan, dsb" />
             </div>
             <div className="flex mt-8">
               <button onClick={_ => setStep(1)} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Selanjutnya</button>
@@ -194,16 +278,22 @@ const RegisterStudent = () => {
             <div className="mt-8">
               <h4 className="text-xl font-bold">Pilih Mata Pelajaran</h4>
               <p className="mt-3">Boleh memilih mata pelajaran lebih dari satu</p>
-              <div className="mt-3">
-                <div className="flex items-center">
-                  <div>
-                    <input type="checkbox" value="Bike" />
-                  </div>
-                  <div className="pl-2">
-                    <p>Matematika</p>
-                  </div>
-                </div>
-              </div>
+              {
+                default_subjects.map(subject => {
+                  return (
+                    <div className="mt-3">
+                      <div className="flex items-center">
+                        <div>
+                          <input checked={checkChosenSubject(subject)} onChange={_ => toggleChosenSubject(subject)} type="checkbox" />
+                        </div>
+                        <div className="pl-2">
+                          <p>{subject}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
             </div>
             <div className="mt-8">
               <h4 className="text-xl font-bold">Jadwal Belajar</h4>
@@ -233,8 +323,8 @@ const RegisterStudent = () => {
               {
                 schedules.length < 8 && (
                   <button onClick={_ => addSchedule()} className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
-                  + Tambahkan Jadwal (Maks. 8)
-                </button>
+                    + Tambahkan Jadwal (Maks. 8)
+                  </button>
                 )
               }
             </div>
@@ -244,7 +334,7 @@ const RegisterStudent = () => {
               <div className="mt-3">
                 <div className="flex items-center">
                   <div>
-                    <input type="checkbox" value="Bike" />
+                    <input checked={checkTutorPref('Laki-laki')} onChange={_ => toggleTutorPref('Laki-laki')} type="checkbox" />
                   </div>
                   <div className="pl-2">
                     <p>Laki-laki</p>
@@ -254,7 +344,7 @@ const RegisterStudent = () => {
               <div className="mt-3">
                 <div className="flex items-center">
                   <div>
-                    <input type="checkbox" value="Bike" />
+                    <input checked={checkTutorPref('Perempuan')} onChange={_ => toggleTutorPref('Perempuan')} type="checkbox" />
                   </div>
                   <div className="pl-2">
                     <p>Perempuan</p>
@@ -263,7 +353,7 @@ const RegisterStudent = () => {
               </div>
               <div className="mt-3">
                 <label className="block">Catatan untuk tutor:</label>
-                <input type="text" className="w-full mt-3 bg-gray-200 px-3" placeholder="Apakah ada permintaan khusus yang perlu diketahui tutor?" />
+                <input type="text" value={form.tutorNote} onInput={e => updateForm('tutorNote', e.target.value)} className="w-full mt-3 bg-gray-200 px-3" placeholder="Apakah ada permintaan khusus yang perlu diketahui tutor?" />
               </div>
             </div>
             <div className="flex flex-wrap mt-8 -mx-3">
@@ -271,7 +361,7 @@ const RegisterStudent = () => {
                 <h4 className="text-xl font-bold">Pilih Paket</h4>
                 <ReactDropdown options={[
                   `8 Sesi`, `24 Sesi`, `48 Sesi`
-                ]} placeholder="Pilih Paket" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                ]} value={form.package} onChange={opt => updateForm('package', opt.value)} placeholder="Pilih Paket" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
               <div className="w-full lg:w-1/2 mt-8 px-3">
                 <h4 className="text-xl font-bold">Estimasi</h4>
@@ -284,7 +374,7 @@ const RegisterStudent = () => {
                 <button onClick={_ => setStep(0)} className="text-lg border px-4 py-2 rounded-md w-full">Periksa Kembali</button>
               </div>
               <div className="w-full lg:w-1/2 px-3 mt-4">
-                <button className="text-lg text-white bg-primary-green px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
+                <button onClick={_submit} className="text-lg text-white bg-primary-green px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
               </div>
             </div>
           </div>

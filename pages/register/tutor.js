@@ -5,6 +5,19 @@ import InputSchedule from '../../components/InputSchedule'
 import ReactDropdown from 'react-dropdown'
 import { province, city } from '../../utils/common'
 
+const default_subjects = [
+  'Calistung',
+  'Matematika SD',
+  'IPA SD',
+  'IPS SD',
+  'Matematika SMP',
+  'IPA SMP',
+  'Matematika SMA',
+  'Fisika SMA',
+  'Kimia SMA',
+  'Biologi SMA',
+]
+
 const default_area = [
   {
     title: `Jakarta Utara`,
@@ -72,7 +85,7 @@ const RegisterTutor = () => {
   const [chosenAreas, setChosenArea] = useState([])
 
   const updateForm = (key, value) => {
-    const clone = {...form}
+    const clone = { ...form }
     clone[key] = value
     setForm(clone)
   }
@@ -236,57 +249,22 @@ const RegisterTutor = () => {
         </div>
         <div className="mt-8">
           <h4 className="text-xl font-bold">Bersedia Mengajar Mata Pelajaran</h4>
-          <div className="flex flex-wrap -mx-3">
-            <div className="w-full lg:w-1/3 px-3">
-              <h4 className="text-xl font-bold mt-2">SD</h4>
-              <div className="mt-3">
-                <div className="flex items-center">
-                  <div>
-                    <input checked={checkChosenSubject('SD Matematika')} onChange={_ => toggleChosenSubject('SD Matematika')} type="checkbox" value="Bike" />
-                  </div>
-                  <div className="pl-2">
-                    <p>Matematika</p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-3">
-                <div className="flex items-center">
-                  <div>
-                    <input checked={checkChosenSubject('SD Bahasa Inggris')} onChange={_ => toggleChosenSubject('SD Bahasa Inggris')} type="checkbox" value="Bike" />
-                  </div>
-                  <div className="pl-2">
-                    <p>Bahasa Inggris</p>
+          {
+            default_subjects.map(subject => {
+              return (
+                <div className="mt-3">
+                  <div className="flex items-center">
+                    <div>
+                      <input checked={checkChosenSubject(subject)} onChange={_ => toggleChosenSubject(subject)} type="checkbox" />
+                    </div>
+                    <div className="pl-2">
+                      <p>{subject}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="w-full lg:w-1/3 px-3">
-              <h4 className="text-xl font-bold mt-2">SMP</h4>
-              <div className="mt-3">
-                <div className="flex items-center">
-                  <div>
-                    <input type="checkbox" value="Bike" />
-                  </div>
-                  <div className="pl-2">
-                    <p>Matematika</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full lg:w-1/3 px-3">
-              <h4 className="text-xl font-bold mt-2">SMA</h4>
-              <div className="mt-3">
-                <div className="flex items-center">
-                  <div>
-                    <input type="checkbox" value="Bike" />
-                  </div>
-                  <div className="pl-2">
-                    <p>Matematika</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              )
+            })
+          }
         </div>
         <div className="mt-8">
           <h4 className="text-xl font-bold">Waktu Mengajar</h4>

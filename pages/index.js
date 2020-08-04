@@ -159,19 +159,33 @@ export default function Home() {
       </div>
       <div className="bg-primary-navy overflow-hidden relative">
         <div className="hidden lg:block absolute h-full w-1/2 z-10 bg-primary-navy"></div>
-        <div className="max-w-6xl m-auto py-16">
-          <div className="flex flex-wrap">
-            <div className="w-full lg:w-1/2 relative z-10 px-4 pt-8">
-              <h4 className="text-2xl text-white font-bold">Menggunakan Metode Pembelajaran</h4>
-              <h3 className="text-3xl text-white font-bold pt-4">Nama Metode</h3>
-            </div>
-            <div className="w-full lg:w-1/2 pt-8">
-              <CarouselProvider
-                naturalSlideWidth={100}
-                naturalSlideHeight={75}
-                totalSlides={slides.length}
-                className="carousel-peek"
-              >
+        <div className="max-w-6xl m-auto">
+          <CarouselProvider
+            naturalSlideWidth={100}
+            naturalSlideHeight={75}
+            totalSlides={slides.length}
+            className="carousel-peek"
+          >
+            <div className="flex flex-wrap relative">
+              <div className="w-full lg:w-1/2 relative z-10 px-4 pt-8">
+                <h4 className="text-2xl text-white font-bold">Menggunakan Metode Pembelajaran</h4>
+                <h3 className="text-3xl text-white font-bold pt-4">Minischool</h3>
+                <div className="flex pt-16">
+                  <ButtonBack>
+                    <svg  width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="24" cy="24" r="24" fill="white" fill-opacity="0.2" />
+                      <path d="M21 24L26 29L26.7 28.3L22.4 24L26.7 19.7L26 19L21 24Z" fill="white" />
+                    </svg>
+                  </ButtonBack>
+                  <ButtonNext  className="ml-4">
+                    <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="24" cy="24" r="24" fill="white" fill-opacity="0.2" />
+                      <path d="M27 24L22 29L21.3 28.3L25.6 24L21.3 19.7L22 19L27 24Z" fill="white" />
+                    </svg>
+                  </ButtonNext>
+                </div>
+              </div>
+              <div className="w-full lg:w-1/2 pt-8">
                 <Slider>
                   {
                     methods.map(method => {
@@ -185,9 +199,9 @@ export default function Home() {
                     })
                   }
                 </Slider>
-              </CarouselProvider>
+              </div>
             </div>
-          </div>
+          </CarouselProvider>
         </div>
       </div>
       <div className="bg-gray-300 py-16">

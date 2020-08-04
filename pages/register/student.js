@@ -4,6 +4,7 @@ import Footer from '../../components/Footer'
 import ReactDropdown from 'react-dropdown'
 import { province, city } from '../../utils/common'
 import InputSchedule from '../../components/InputSchedule'
+import { useRouter } from 'next/router'
 
 const default_subjects = [
   'Calistung',
@@ -19,10 +20,12 @@ const default_subjects = [
 ]
 
 const RegisterStudent = () => {
+  const router = useRouter()
   const [step, setStep] = useState(0)
+  console.log(router.query)
   const [form, setForm] = useState({
-    fullname: '',
-    class: '',
+    fullname: router.query.fullname || '',
+    class: router.query.class ||'',
     schoolName: '',
     stuPhoneNumber: '',
     stuEmail: '',

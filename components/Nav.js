@@ -5,7 +5,11 @@ const Nav = () => {
     <div className="sticky top-0 bg-white z-50 shadow-md">
       <div className="max-w-6xl m-auto flex items-center justify-between px-4 py-2">
         <div>
-          Logo
+          <Link href="/">
+            <a>
+              Logo
+            </a>
+          </Link>
         </div>
         <div className="hidden md:block">
           <div className="flex items-center">

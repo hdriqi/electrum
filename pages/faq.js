@@ -1,5 +1,6 @@
 import Nav from '../components/Nav'
 import { useState } from 'react'
+import Footer from '../components/Footer'
 
 const faqs = [
   {
@@ -69,6 +70,7 @@ const FAQ = () => {
           })
         }
       </div>
+      <Footer />
     </div>
   )
 }

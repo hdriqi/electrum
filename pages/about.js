@@ -1,5 +1,6 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import FooterCTA from '../components/FooterCTA'
 
 const about = {
   intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ridiculus sed fermentum vulputate lacinia dictumst in dapibus. Duis turpis ac facilisis pellentesque porttitor a, amet. In cursus velit quisque vivamus placerat malesuada.',
@@ -100,19 +101,7 @@ export default function Home() {
       <div className="bg-primary-navy">
         <div className="max-w-6xl m-auto px-4 py-16">
           <h4 className="text-3xl font-bold text-white">Tertarik untuk belajar di Bimbel Elektrum? Daftar Sekarang!</h4>
-          <div className="flex flex-wrap mt-12 -mx-3">
-            <div className="w-full lg:w-1/3 px-3 pt-4">
-              <label className="block text-lg text-white font-semibold">Nama Lengkap</label>
-              <input type="text" className="w-full mt-2" />
-            </div>
-            <div className="w-full lg:w-1/3 px-3 pt-4">
-              <label className="block text-lg text-white font-semibold">Kelas</label>
-              <input type="text" className="w-full mt-2" />
-            </div>
-            <div className="w-full lg:w-1/3 px-3 pt-8 flex items-end">
-              <button className="text-lg bg-primary-green px-4 py-2 rounded-md w-full">Selanjutnya</button>
-            </div>
-          </div>
+          <FooterCTA />
         </div>
       </div>
       <Footer />

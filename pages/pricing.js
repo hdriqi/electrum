@@ -1,8 +1,72 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import ReactDropdown from 'react-dropdown'
+import { useState, useEffect } from 'react'
 
 const pricing = [
   {
+    level: 'SD',
+    class: '1-6',
+    list: [
+      {
+        name: 'Normal (Per Sesi)',
+        price: [
+          120000,
+          220000,
+          300000,
+          360000,
+          425000,
+          450000,
+          490000
+        ]
+      },
+      {
+        name: 'Normal (Per 8 Sesi)',
+        price: [
+          1200000,
+          2200000,
+          3000000,
+          3600000,
+          4250000,
+          4500000,
+          4900000
+        ]
+      }
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '7-8',
+    list: [
+      {
+        name: 'Normal (Per Sesi)',
+        price: [
+          120000,
+          220000,
+          300000,
+          360000,
+          425000,
+          450000,
+          490000
+        ]
+      },
+      {
+        name: 'Normal (Per 8 Sesi)',
+        price: [
+          1200000,
+          2200000,
+          3000000,
+          3600000,
+          4250000,
+          4500000,
+          4900000
+        ]
+      }
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '9',
     list: [
       {
         name: 'Normal (Per Sesi)',
@@ -32,7 +96,52 @@ const pricing = [
   }
 ]
 
+const filter = [
+  {
+    level: 'SD',
+    classes: [
+      '1-6'
+    ]
+  },
+  {
+    level: 'SMP',
+    classes: [
+      '7-8',
+      '9'
+    ]
+  },
+  {
+    level: 'SMA',
+    classes: [
+      '10-11',
+      '12'
+    ]
+  },
+]
+
+const levelOpts = filter.map(x => x.level)
+
 const Pricing = () => {
+  const [level, setLevel] = useState('SD')
+  const [chosenClass, setChosenClass] = useState('1-6')
+  const [classOpts, setClassOpts] = useState(['1-6'])
+
+  const tableHead = pricing.find(price => {
+    return price.level === level && price.class === chosenClass
+  })?.list[0]?.price || []
+
+  const tableBody = pricing.find(price => {
+    return price.level === level && price.class === chosenClass
+  })?.list || []
+  
+  useEffect(() => {
+    if (level) {
+      const opts = filter.find(x => x.level === level).classes
+      setClassOpts(opts)
+      setChosenClass(opts[0])
+    }
+  }, [level])
+
   return (
     <div>
       <Nav />
@@ -46,11 +155,11 @@ const Pricing = () => {
         <div className="flex flex-wrap -mx-3 px-4">
           <div className="w-full lg:w-1/2 mt-2 px-3">
             <label className="block">Jenjang</label>
-            <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+            <ReactDropdown value={level} onChange={opt => setLevel(opt.value)} options={levelOpts} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
           </div>
           <div className="w-full lg:w-1/2 mt-2 px-3">
             <label className="block">Kelas</label>
-            <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
+            <ReactDropdown value={chosenClass} onChange={opt => setChosenClass(opt.value)} options={classOpts} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
           </div>
         </div>
         <div className="overflow-x-auto mt-8 pl-4 lg:px-4">
@@ -61,7 +170,7 @@ const Pricing = () => {
             </tr>
             <tr>
               {
-                pricing[0].list[0].price.map((price, idx) => {
+                tableHead.map((price, idx) => {
                   return (
                     <th className="p-2">{idx + 1}</th>
                   )
@@ -69,7 +178,7 @@ const Pricing = () => {
               }
             </tr>
             {
-              pricing[0].list.map((pkg, idx) => {
+              tableBody.map((pkg, idx) => {
                 return (
                   <tr>
                     <td className="text-center p-2">{pkg.name}</td>

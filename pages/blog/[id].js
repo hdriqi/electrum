@@ -22,7 +22,7 @@ const Post = () => {
           backgroundPosition: `center`
         }}></div>
       </div>
-      <div className="px-2 pb-16">
+      <div className="px-4 pb-16">
         <div className="max-w-3xl m-auto bg-white rounded-md p-4 lg:p-8 -mt-16 relative z-10">
           <h2 className="text-xl lg:text-4xl font-semibold">{data.title}</h2>
           <p className="mt-2">{new Date(Number(data.createdAt)).toLocaleString()}</p>

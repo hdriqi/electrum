@@ -1,5 +1,17 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
+
+const slides = [
+  {
+    img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
+    url: `/blog/123`
+  },
+  {
+    img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
+    url: `/blog/123`
+  }
+]
 
 const whyElectrum = [
   {
@@ -24,10 +36,69 @@ const whyElectrum = [
   }
 ]
 
+const ResponsiveCarousel = ({ children }) => {
+  return (
+    <div className="relative">
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={50}
+        totalSlides={slides.length}
+        className="block lg:hidden"
+      >
+        {children}
+      </CarouselProvider>
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={33}
+        totalSlides={slides.length}
+        className="hidden lg:block"
+      >
+        {children}
+      </CarouselProvider>
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <div>
       <Nav />
+      <div>
+        <ResponsiveCarousel>
+          <Slider>
+            {
+              slides.map((slide, idx) => {
+                return (
+                  <Slide index={idx}>
+                    <img className="w-full h-full object-cover" src={slide.img} />
+                  </Slide>
+                )
+              })
+            }
+          </Slider>
+          <div className="absolute h-full left-0 top-0">
+            <div className="flex items-center h-full px-2 lg:px-8">
+              <ButtonBack>
+                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="24" r="24" fill="white" fill-opacity="0.2" />
+                  <path d="M21 24L26 29L26.7 28.3L22.4 24L26.7 19.7L26 19L21 24Z" fill="white" />
+                </svg>
+
+              </ButtonBack>
+            </div>
+          </div>
+          <div className="absolute h-full right-0 top-0">
+            <div className="flex items-center h-full px-2 lg:px-8">
+              <ButtonNext>
+                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="24" r="24" fill="white" fill-opacity="0.2" />
+                  <path d="M27 24L22 29L21.3 28.3L25.6 24L21.3 19.7L22 19L27 24Z" fill="white" />
+                </svg>
+              </ButtonNext>
+            </div>
+          </div>
+        </ResponsiveCarousel>
+      </div>
       <div className="max-w-6xl m-auto px-4 py-16">
         <h3 className="text-3xl font-bold">Kenapa Harus Memilih Electrum</h3>
         <div className="flex flex-wrap -mx-3">

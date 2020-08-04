@@ -12,6 +12,7 @@
     "pure-react-carousel": "^1.27.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-dropdown": "^1.7.0",
     "tailwindcss": "^1.6.1"
   },
   "devDependencies": {

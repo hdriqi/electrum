@@ -108,7 +108,7 @@ const RegisterTutor = () => {
         <div className="mt-8">
           <h4 className="text-xl font-bold">Bersedia Mengajar Mata Pelajaran</h4>
           <div className="flex flex-wrap -mx-3">
-            <div className="w-1/3 px-3">
+            <div className="w-full lg:w-1/3 px-3">
               <h4 className="text-xl font-bold mt-2">SD</h4>
               <div className="mt-2">
                 <div className="flex items-center">
@@ -121,7 +121,7 @@ const RegisterTutor = () => {
                 </div>
               </div>
             </div>
-            <div className="w-1/3 px-3">
+            <div className="w-full lg:w-1/3 px-3">
               <h4 className="text-xl font-bold mt-2">SMP</h4>
               <div className="mt-2">
                 <div className="flex items-center">
@@ -134,7 +134,7 @@ const RegisterTutor = () => {
                 </div>
               </div>
             </div>
-            <div className="w-1/3 px-3">
+            <div className="w-full lg:w-1/3 px-3">
               <h4 className="text-xl font-bold mt-2">SMA</h4>
               <div className="mt-2">
                 <div className="flex items-center">
@@ -153,11 +153,11 @@ const RegisterTutor = () => {
           <h4 className="text-xl font-bold">Waktu Mengajar</h4>
           <p className="mt-2">Harus memilih <b>minimal 3 waktu</b> yang diinginkan</p>
           <div className="flex flex-wrap -mx-3">
-            <div className="w-full lg:w-1/2 mt-2 px-3">
+            <div className="w-1/2 mt-2 px-3">
               <label className="block">Hari</label>
               <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
             </div>
-            <div className="w-full lg:w-1/2 mt-2 px-3">
+            <div className="w-1/2 mt-2 px-3">
               <label className="block">Waktu</label>
               <input type="text" className="w-full mt-2 bg-gray-200 px-3" />
             </div>

@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const Nav = () => {
   return (
     <div className="sticky top-0 bg-white z-50 shadow-md">
@@ -8,13 +10,25 @@ const Nav = () => {
         <div className="hidden md:block">
           <div className="flex items-center">
             <div className="px-4">
-              <button className="bg-primary-green text-white px-4 py-2 rounded-md">Daftar Sekarang</button>
+              <Link href="/register/student">
+                <a>
+                  <button className="bg-primary-green text-white px-4 py-2 rounded-md">Daftar Sekarang</button>
+                </a>
+              </Link>
             </div>
             <div className="px-4">
-              <h4>Biaya</h4>
+              <Link href="/pricing">
+                <a>
+                  <h4>Biaya</h4>
+                </a>
+              </Link>
             </div>
             <div className="px-4">
-              <h4>Menjadi Tutor</h4>
+              <Link href="/register/tutor">
+                <a>
+                  <h4>Menjadi Tutor</h4>
+                </a>
+              </Link>
             </div>
             <div>
               <svg width="1" height="32" viewBox="0 0 1 32" fill="none" xmlns="http://www.w3.org/2000/svg">

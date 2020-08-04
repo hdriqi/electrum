@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 const pricing = [
   {
@@ -86,6 +87,7 @@ const Pricing = () => {
           </table>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

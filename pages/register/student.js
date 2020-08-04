@@ -52,6 +52,35 @@ const RegisterStudent = () => {
     console.log(schedules)
   }
 
+  const step1FormValidation = () => {
+    if (
+      form.fullname.length > 0 &&
+      form.class.length > 0 &&
+      form.schoolName.length > 0 &&
+      form.parentTitle.length > 0 &&
+      form.parentFullname.length > 0 &&
+      form.parentPhoneNumber.length > 0 &&
+      form.parentEmail.length > 0 &&
+      form.addressProvince.length > 0 &&
+      form.addressCity.length > 0
+    ) {
+      return true
+    }
+    return false
+  }
+
+  const step2FormValidation = () => {
+    if (
+      chosenSubject.length > 0 &&
+      schedules.length > 2 && 
+      tutorPreference.length > 0 &&
+      form.package.length > 0
+    ) {
+      return true
+    }
+    return false
+  }
+
   const updateForm = (key, value) => {
     const clone = { ...form }
     clone[key] = value
@@ -264,7 +293,7 @@ const RegisterStudent = () => {
               <input type="text" value={form.addressDetail} onInput={e => updateForm('addressDetail', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" placeholder="Tulis alamat lengkap: Jalan, Kelurahan, Kecamatan, dsb" />
             </div>
             <div className="flex mt-8">
-              <button onClick={_ => setStep(1)} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Selanjutnya</button>
+              <button disabled={!step1FormValidation()} onClick={_ => setStep(1)} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Selanjutnya</button>
             </div>
           </div>
         )
@@ -303,7 +332,7 @@ const RegisterStudent = () => {
                   schedules.map((sch, idx) => {
                     return (
                       <div className="flex items-top" key={idx}>
-                        <InputSchedule value={sch} className="w-10/12" chosenSchedule={schedules} cb={sch => updateSchedule(idx, sch)} />
+                        <InputSchedule currentSchedules={schedules} value={sch} className="w-10/12" chosenSchedule={schedules} cb={sch => updateSchedule(idx, sch)} />
                         {
                           idx > 2 && (
                             <div className="w-2/12 px-1">
@@ -374,7 +403,7 @@ const RegisterStudent = () => {
                 <button onClick={_ => setStep(0)} className="text-lg border px-4 py-2 rounded-md w-full">Periksa Kembali</button>
               </div>
               <div className="w-full lg:w-1/2 px-3 mt-4">
-                <button onClick={_submit} className="text-lg text-white bg-primary-green px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
+                <button disabled={!step2FormValidation()} onClick={_submit} className="text-lg text-white bg-primary-green px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
               </div>
             </div>
           </div>

@@ -14,4 +14,8 @@ th, td {
   overflow: visible;
 }
 
+button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
 @tailwind utilities;

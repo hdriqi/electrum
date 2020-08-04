@@ -62,7 +62,8 @@ const RegisterStudent = () => {
       form.parentPhoneNumber.length > 0 &&
       form.parentEmail.length > 0 &&
       form.addressProvince.length > 0 &&
-      form.addressCity.length > 0
+      form.addressCity.length > 0 &&
+      form.addressDetail.length > 0
     ) {
       return true
     }

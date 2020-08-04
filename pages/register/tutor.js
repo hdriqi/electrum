@@ -80,9 +80,33 @@ const RegisterTutor = () => {
     attachment: ''
   })
 
-  const [schedules, setSchedules] = useState([{}, {}, {}, {}])
   const [chosenSubject, setChosenSubject] = useState([])
+  const [schedules, setSchedules] = useState([{}, {}, {}, {}])
   const [chosenAreas, setChosenArea] = useState([])
+
+  const formValidation = () => {
+    if (
+      form.fullname.length > 0 &&
+      form.dateOfBirth.length > 0 &&
+      form.addressProvince.length > 0 &&
+      form.addressCity.length > 0 &&
+      form.addressDetail.length > 0 &&
+      form.transport.length > 0 &&
+      form.phoneNumber.length > 0 &&
+      form.email.length > 0 &&
+      form.eduUniversity.length > 0 &&
+      form.eduMajor.length > 0 &&
+      form.eduGradYear.length > 0 &&
+      form.eduGPA.length > 0 &&
+      // form.attachment.length > 0 && 
+      chosenSubject.length > 0 &&
+      schedules.length > 3 && 
+      chosenAreas.length > 0
+    ) {
+      return true
+    }
+    return false
+  }
 
   const updateForm = (key, value) => {
     const clone = { ...form }
@@ -196,14 +220,12 @@ const RegisterTutor = () => {
         <div className="mt-3">
           <div className="flex">
             <label className="block">Nomor HP</label>
-            <p className="text-gray-600 pl-2">(Opsional)</p>
           </div>
           <input type="text" value={form.phoneNumber} onInput={e => updateForm('phoneNumber', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" placeholder="081234567890" />
         </div>
         <div className="mt-3">
           <div className="flex">
             <label className="block">Email</label>
-            <p className="text-gray-600 pl-2">(Opsional)</p>
           </div>
           <input type="text" value={form.email} onInput={e => updateForm('email', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
         </div>
@@ -306,8 +328,8 @@ const RegisterTutor = () => {
             {
               default_area.map((data, idx) => {
                 return (
-                  <div className="cursor-pointer w-full lg:w-1/2 mt-2 px-3" key={idx} onClick={_ => toggleChosenArea(data.title)}>
-                    <div className={`transition duration-150 ease-in-out h-40 border rounded-md p-4 ${chosenAreas.findIndex(area => area === data.title) > -1 ? 'bg-green-200' : 'bg-gray-200 '}`}>
+                  <div className="cursor-pointer w-full lg:w-1/2 mt-2 px-3" key={idx}>
+                    <div onClick={_ => toggleChosenArea(data.title)} className={`transition duration-150 ease-in-out h-40 border rounded-md p-4 ${chosenAreas.findIndex(area => area === data.title) > -1 ? 'bg-green-200' : 'bg-gray-200 '}`}>
                       <h4 className="text-lg font-semibold">{data.title}</h4>
                       <p className="text-sm mt-2">{data.desc}</p>
                     </div>
@@ -318,7 +340,7 @@ const RegisterTutor = () => {
           </div>
         </div>
         <div className="flex mt-8">
-          <button onClick={_ => _submit()} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
+          <button disabled={!formValidation()} onClick={_ => _submit()} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
         </div>
       </div >
       <div className="pt-16">

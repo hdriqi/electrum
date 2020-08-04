@@ -1,5 +1,6 @@
 import Nav from '../../components/Nav'
 import { useState } from 'react'
+import Footer from '../../components/Footer'
 
 const RegisterTutor = () => {
   return (
@@ -182,6 +183,9 @@ const RegisterTutor = () => {
         <div className="flex mt-8">
           <button onClick={_ => setStep(1)} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
         </div>
+      </div>
+      <div className="pt-16">
+        <Footer />
       </div>
     </div>
   )

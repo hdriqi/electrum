@@ -60,7 +60,7 @@ const FAQ = () => {
           <h2 className="text-3xl text-white text-center font-bold">Frequently Asked Question</h2>
         </div>
       </div>
-      <div className="max-w-3xl m-auto rounded-md px-4 overflow-hidden">
+      <div className="max-w-3xl m-auto rounded-md px-4 overflow-hidden py-16">
         {
           faqs.map(faq => {
             return (

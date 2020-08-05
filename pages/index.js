@@ -128,11 +128,11 @@ export default function Home() {
       </div>
       <div className="max-w-6xl m-auto px-4 py-16">
         <h3 className="text-3xl font-bold">Kenapa Harus Memilih Electrum</h3>
-        <div className="flex flex-wrap -mx-3">
+        <div className="flex flex-wrap -mx-3 lg:-mx-12">
           {
             whyElectrum.map(data => {
               return (
-                <div className="w-1/2 lg:w-1/4 px-3 mt-12 lg:mt-20">
+                <div className="w-1/2 lg:w-1/4 px-3 lg:px-12 mt-12 lg:mt-20">
                   <div>
                     <div className="relative">
                       <div className="absolute w-full" style={{

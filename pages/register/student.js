@@ -22,10 +22,9 @@ const default_subjects = [
 const RegisterStudent = () => {
   const router = useRouter()
   const [step, setStep] = useState(0)
-  console.log(router.query)
   const [form, setForm] = useState({
     fullname: router.query.fullname || '',
-    class: router.query.class ||'',
+    class: router.query.class || '',
     schoolName: '',
     stuPhoneNumber: '',
     stuEmail: '',
@@ -49,10 +48,17 @@ const RegisterStudent = () => {
   }, [step])
 
   const _submit = () => {
-    console.log(form)
-    console.log(additionalStudents)
-    console.log(chosenSubject)
-    console.log(schedules)
+    const data = {
+      ...form,
+      ...{ additionalStudents: additionalStudents },
+      ...{ subjects: chosenSubject },
+      ...{ schedules: schedules }
+    }
+    console.log(data)
+    // console.log(form)
+    // console.log(additionalStudents)
+    // console.log(chosenSubject)
+    // console.log(schedules)
   }
 
   const step1FormValidation = () => {
@@ -76,7 +82,7 @@ const RegisterStudent = () => {
   const step2FormValidation = () => {
     if (
       chosenSubject.length > 0 &&
-      schedules.length > 2 && 
+      schedules.length > 2 &&
       tutorPreference.length > 0 &&
       form.package.length > 0
     ) {

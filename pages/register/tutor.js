@@ -115,10 +115,13 @@ const RegisterTutor = () => {
   }
 
   const _submit = () => {
-    console.log(form)
-    console.log(chosenSubject)
-    console.log(schedules)
-    console.log(chosenAreas)
+    const data = {
+      ...form,
+      ...{ schedules: schedules },
+      ...{ subjects: chosenSubject },
+      ...{ areas: chosenAreas }
+    }
+    console.log(data)
   }
 
   const checkChosenSubject = (data) => {

@@ -7,91 +7,71 @@ const pricing = [
   {
     level: 'SD',
     class: '1-6',
-    list: [
-      {
-        name: 'Normal (Per Sesi)',
-        price: [
-          120000,
-          220000,
-          300000,
-          360000,
-          425000,
-          450000,
-          490000
-        ]
-      },
-      {
-        name: 'Normal (Per 8 Sesi)',
-        price: [
-          1200000,
-          2200000,
-          3000000,
-          3600000,
-          4250000,
-          4500000,
-          4900000
-        ]
-      }
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ],
+  },
+  {
+    level: 'SD',
+    class: '1-6',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
     ]
   },
   {
     level: 'SMP',
     class: '7-8',
-    list: [
-      {
-        name: 'Normal (Per Sesi)',
-        price: [
-          120000,
-          220000,
-          300000,
-          360000,
-          425000,
-          450000,
-          490000
-        ]
-      },
-      {
-        name: 'Normal (Per 8 Sesi)',
-        price: [
-          1200000,
-          2200000,
-          3000000,
-          3600000,
-          4250000,
-          4500000,
-          4900000
-        ]
-      }
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '7-8',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
     ]
   },
   {
     level: 'SMP',
     class: '9',
-    list: [
-      {
-        name: 'Normal (Per Sesi)',
-        price: [
-          120000,
-          220000,
-          300000,
-          360000,
-          425000,
-          450000,
-          490000
-        ]
-      },
-      {
-        name: 'Normal (Per 8 Sesi)',
-        price: [
-          1200000,
-          2200000,
-          3000000,
-          3600000,
-          4250000,
-          4500000,
-          4900000
-        ]
-      }
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
     ]
   }
 ]
@@ -128,12 +108,12 @@ const Pricing = () => {
 
   const tableHead = pricing.find(price => {
     return price.level === level && price.class === chosenClass
-  })?.list[0]?.price || []
+  })?.price || []
 
-  const tableBody = pricing.find(price => {
+  const tableBody = pricing.filter(price => {
     return price.level === level && price.class === chosenClass
-  })?.list || []
-  
+  }) || []
+
   useEffect(() => {
     if (level) {
       const opts = filter.find(x => x.level === level).classes
@@ -166,7 +146,7 @@ const Pricing = () => {
           <table>
             <tr>
               <th rowSpan="2" className="p-2">Paket</th>
-              <th className="bg-green-100 p-2" colSpan={pricing[0].list[0].price.length}>Jumlah Anak</th>
+              <th className="bg-green-100 p-2" colSpan={pricing[0].price.length}>Jumlah Anak</th>
             </tr>
             <tr>
               {
@@ -181,7 +161,7 @@ const Pricing = () => {
               tableBody.map((pkg, idx) => {
                 return (
                   <tr>
-                    <td className="text-center p-2">{pkg.name}</td>
+                    <td className="text-center p-2">{pkg.session}</td>
                     {
                       pkg.price.map(price => {
                         return (

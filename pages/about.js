@@ -11,25 +11,25 @@ const about = {
       img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       name: 'Jane Doe',
       position: 'Chief Executive Officer',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
     },
     {
       img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       name: 'Jane Doe',
       position: 'Chief Executive Officer',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
     },
     {
       img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       name: 'Jane Doe',
       position: 'Chief Executive Officer',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
     },
     {
       img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       name: 'Jane Doe',
       position: 'Chief Executive Officer',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
     }
   ]
 }
@@ -88,7 +88,7 @@ export default function Home() {
                       <div className="px-3">
                         <h4 className="text-lg font-semibold">{team.name}</h4>
                         <h4 className="text-sm font-semibold mt-2">{team.position}</h4>
-                        <p className="mt-4">{team.desc}</p>
+                        <p className="mt-4">{team.quotes}</p>
                       </div>
                     </div>
                   </div>

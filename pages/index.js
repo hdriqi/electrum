@@ -1,67 +1,65 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
-import { useState } from 'react'
 import FooterCTA from '../components/FooterCTA'
 
-const slides = [
-  {
-    img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
-    url: `/blog/123`
-  },
-  {
-    img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
-    url: `/blog/123`
-  }
-]
-
-const methods = [
-  {
-    name: 'Metode 1',
-    img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-    desc: ``
-  },
-  {
-    name: 'Metode 2',
-    img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`
-  }
-]
-
-const testimonials = [
-  {
-    name: 'John Doe',
-    img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mattis justo.`
-  },
-  {
-    name: 'Bambang Suparno',
-    img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mattis justo.`
-  }
-]
-
-const whyElectrum = [
-  {
-    icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-    title: 'Laporan Progress',
-    desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-  },
-  {
-    icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-    title: 'Laporan Progress',
-    desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-  },
-  {
-    icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-    title: 'Laporan Progress',
-    desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-  },
-  {
-    icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-    title: 'Laporan Progress',
-    desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-  }
-]
+const data = {
+  slides: [
+    {
+      img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
+      url: `/blog/123`
+    },
+    {
+      img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
+      url: `/blog/123`
+    }
+  ],
+  whyUs: [
+    {
+      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
+      title: 'Laporan Progress',
+      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+    },
+    {
+      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
+      title: 'Laporan Progress',
+      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+    },
+    {
+      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
+      title: 'Laporan Progress',
+      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+    },
+    {
+      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
+      title: 'Laporan Progress',
+      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
+    }
+  ],
+  methods: [
+    {
+      name: 'Metode 1',
+      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
+      desc: ``
+    },
+    {
+      name: 'Metode 2',
+      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`
+    }
+  ],
+  testimonials: [
+    {
+      name: 'John Doe',
+      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
+      message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mattis justo.`
+    },
+    {
+      name: 'Bambang Suparno',
+      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
+      message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mattis justo.`
+    }
+  ]
+}
 
 const ResponsiveCarousel = ({ children }) => {
   return (
@@ -69,7 +67,7 @@ const ResponsiveCarousel = ({ children }) => {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={50}
-        totalSlides={slides.length}
+        totalSlides={data.slides.length}
         className="block lg:hidden"
       >
         {children}
@@ -77,7 +75,7 @@ const ResponsiveCarousel = ({ children }) => {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={33}
-        totalSlides={slides.length}
+        totalSlides={data.slides.length}
         className="hidden lg:block"
       >
         {children}
@@ -94,7 +92,7 @@ export default function Home() {
         <ResponsiveCarousel>
           <Slider>
             {
-              slides.map((slide, idx) => {
+              data.slides.map((slide, idx) => {
                 return (
                   <Slide index={idx}>
                     <img className="w-full h-full object-cover" src={slide.img} />
@@ -110,7 +108,6 @@ export default function Home() {
                   <circle cx="24" cy="24" r="24" fill="white" fill-opacity="0.2" />
                   <path d="M21 24L26 29L26.7 28.3L22.4 24L26.7 19.7L26 19L21 24Z" fill="white" />
                 </svg>
-
               </ButtonBack>
             </div>
           </div>
@@ -130,7 +127,7 @@ export default function Home() {
         <h3 className="text-3xl font-bold">Kenapa Harus Memilih Electrum</h3>
         <div className="flex flex-wrap -mx-3 lg:-mx-12">
           {
-            whyElectrum.map(data => {
+            data.whyUs.map(data => {
               return (
                 <div className="w-1/2 lg:w-1/4 px-3 lg:px-12 mt-12 lg:mt-20">
                   <div>
@@ -165,7 +162,7 @@ export default function Home() {
           <CarouselProvider
             naturalSlideWidth={100}
             naturalSlideHeight={75}
-            totalSlides={slides.length}
+            totalSlides={data.methods.length}
             className="carousel-peek"
           >
             <div className="flex flex-wrap relative">
@@ -190,7 +187,7 @@ export default function Home() {
               <div className="w-full lg:w-1/2 pt-8">
                 <Slider>
                   {
-                    methods.map(method => {
+                    data.methods.map(method => {
                       return (
                         <Slide>
                           <div className="px-4">
@@ -211,12 +208,12 @@ export default function Home() {
           <h3 className="text-3xl font-bold text-center">Apa Kata Teman-teman</h3>
           <CarouselProvider
             isIntrinsicHeight={true}
-            totalSlides={slides.length}
+            totalSlides={data.testimonials.length}
             className="mt-8 relative"
           >
             <Slider>
               {
-                testimonials.map(testimony => {
+                data.testimonials.map(testimony => {
                   return (
                     <Slide>
                       <div className="flex justify-center px-4">
@@ -240,7 +237,6 @@ export default function Home() {
                       <path d="M21 24L26 29L26.7 28.3L22.4 24L26.7 19.7L26 19L21 24Z" fill="#575757" />
                     </g>
                   </svg>
-
                 </ButtonBack>
               </div>
             </div>
@@ -253,7 +249,6 @@ export default function Home() {
                       <path d="M27 24L22 29L21.3 28.3L25.6 24L21.3 19.7L22 19L27 24Z" fill="#575757" />
                     </g>
                   </svg>
-
                 </ButtonNext>
               </div>
             </div>

@@ -18,7 +18,7 @@ const FooterCTA = () => {
     <div className="flex flex-wrap mt-12 -mx-3">
       <div className="w-full lg:w-1/3 px-3 pt-4">
         <label className="block text-lg text-white font-semibold">Nama Lengkap</label>
-        <input type="text" value={form.fullname} onInput={e => updateForm('fullname', e.target.value)} className="w-full mt-2" />
+        <input type="text" value={form.fullname} onInput={e => updateForm('fullname', e.target.value)} placeholder="Nama Siswa" className="w-full mt-2" />
       </div>
       <div className="w-full lg:w-1/3 px-3 pt-4">
         <label className="block text-lg text-white font-semibold">Kelas</label>

@@ -5,6 +5,290 @@ import ReactDropdown from 'react-dropdown'
 import { province, city } from '../../utils/common'
 import InputSchedule from '../../components/InputSchedule'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+
+const pricing = [
+  {
+    level: 'SD',
+    class: '1-6',
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ],
+  },
+  {
+    level: 'SD',
+    class: '1-6',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SD',
+    class: '1-6',
+    session: 24,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SD',
+    class: '1-6',
+    session: 48,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '7-8',
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ],
+  },
+  {
+    level: 'SMP',
+    class: '7-8',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '7-8',
+    session: 24,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '7-8',
+    session: 48,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '9',
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ],
+  },
+  {
+    level: 'SMP',
+    class: '9',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '9',
+    session: 24,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMP',
+    class: '9',
+    session: 48,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '10-11',
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ],
+  },
+  {
+    level: 'SMA',
+    class: '10-11',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '10-11',
+    session: 24,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '10-11',
+    session: 48,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '12',
+    session: 1,
+    price: [
+      120000,
+      220000,
+      300000,
+      360000,
+      425000,
+      450000,
+      490000
+    ],
+  },
+  {
+    level: 'SMA',
+    class: '12',
+    session: 8,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '12',
+    session: 24,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+  {
+    level: 'SMA',
+    class: '12',
+    session: 48,
+    price: [
+      1200000,
+      2200000,
+      3000000,
+      3600000,
+      4250000,
+      4500000,
+      4900000
+    ]
+  },
+]
 
 const default_subjects = [
   'Calistung',
@@ -21,7 +305,8 @@ const default_subjects = [
 
 const RegisterStudent = () => {
   const router = useRouter()
-  const [step, setStep] = useState(0)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [step, setStep] = useState(1)
   const [form, setForm] = useState({
     fullname: router.query.fullname || '',
     class: router.query.class || '',
@@ -36,8 +321,9 @@ const RegisterStudent = () => {
     addressCity: '',
     addressDetail: '',
     tutorNote: '',
-    package: ''
+    package: null
   })
+  const [priceEst, setPriceEst] = useState(null)
   const [chosenSubject, setChosenSubject] = useState([])
   const [additionalStudents, setAdditionalStudents] = useState([])
   const [tutorPreference, setTutorPreference] = useState([])
@@ -47,6 +333,51 @@ const RegisterStudent = () => {
     window.scrollTo(0, 0)
   }, [step])
 
+  useEffect(() => {
+    if (form.package) {
+      console.log('update package')
+      const nOfStud = 1 + additionalStudents.length
+      let priceClass = null
+      switch (form.class) {
+        case `1`:
+        case `2`:
+        case `3`:
+        case `4`:
+        case `5`:
+        case `6`:
+          priceClass = `1-6`
+          break
+        case `7`:
+        case `8`:
+          priceClass = `7-8`
+          break
+        case `9`:
+          priceClass = `9`
+          break
+        case `10`:
+        case `11`:
+          priceClass = `10-11`
+          break
+        case `12`:
+          priceClass = `12`
+          break
+      }
+      const price = pricing.filter(price => {
+        return (price.class.includes(priceClass) && price.session == form.package)
+      })
+      const selectedPackage = price[0]
+      if (selectedPackage) {
+        setPriceEst({
+          msg: `Program Kelas ${form.class}, Jumlah ${nOfStud} Orang. Paket ${form.package} Sesi.`,
+          price: selectedPackage.price[nOfStud - 1]
+        })
+      }
+      else {
+        setPriceEst(null)
+      }
+    }
+  }, [form, additionalStudents])
+
   const _submit = () => {
     const data = {
       ...form,
@@ -55,6 +386,7 @@ const RegisterStudent = () => {
       ...{ schedules: schedules }
     }
     console.log(data)
+    setShowConfirmModal(true)
     // console.log(form)
     // console.log(additionalStudents)
     // console.log(chosenSubject)
@@ -69,10 +401,10 @@ const RegisterStudent = () => {
       form.parentTitle.length > 0 &&
       form.parentFullname.length > 0 &&
       form.parentPhoneNumber.length > 0 &&
-      form.parentEmail.length > 0 &&
       form.addressProvince.length > 0 &&
       form.addressCity.length > 0 &&
-      form.addressDetail.length > 0
+      form.addressDetail.length > 0 &&
+      additionalStudents.every((fullName) => fullName.length > 0)
     ) {
       return true
     }
@@ -83,8 +415,9 @@ const RegisterStudent = () => {
     if (
       chosenSubject.length > 0 &&
       schedules.length > 2 &&
+      schedules.every(schedule => schedule.day && schedule.hour) &&
       tutorPreference.length > 0 &&
-      form.package.length > 0
+      form.package.toString().length > 0
     ) {
       return true
     }
@@ -173,8 +506,38 @@ const RegisterStudent = () => {
     setSchedules(cloneSchedules)
   }
 
+  const phoneNumber = `082134567890`
+  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
+
   return (
     <div className="bg-gray-100">
+      {
+        showConfirmModal && (
+          <div className="fixed pt-24 px-4 inset-0" style={{
+            backgroundColor: `rgba(0, 0, 0, 0.8)`,
+            zIndex: 60
+          }}>
+            <div className="max-w-md m-auto bg-white p-4 rounded-md">
+              <div className="flex flex-col items-center relative">
+                <div className="absolute top-0 right-0">
+                  <svg onClick={_ => setShowConfirmModal(!showConfirmModal)} className="cursor-pointer" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.4158 16.0041L21.7158 11.7141C21.9041 11.5258 22.0099 11.2704 22.0099 11.0041C22.0099 10.7378 21.9041 10.4824 21.7158 10.2941C21.5275 10.1058 21.2721 10 21.0058 10C20.7395 10 20.4841 10.1058 20.2958 10.2941L16.0058 14.5941L11.7158 10.2941C11.5275 10.1058 11.2721 10 11.0058 10C10.7395 10 10.4841 10.1058 10.2958 10.2941C10.1075 10.4824 10.0017 10.7378 10.0017 11.0041C10.0017 11.2704 10.1075 11.5258 10.2958 11.7141L14.5958 16.0041L10.2958 20.2941C10.2021 20.3871 10.1277 20.4977 10.0769 20.6195C10.0261 20.7414 10 20.8721 10 21.0041C10 21.1361 10.0261 21.2668 10.0769 21.3887C10.1277 21.5105 10.2021 21.6211 10.2958 21.7141C10.3888 21.8078 10.4994 21.8822 10.6212 21.933C10.7431 21.9838 10.8738 22.0099 11.0058 22.0099C11.1378 22.0099 11.2685 21.9838 11.3904 21.933C11.5122 21.8822 11.6228 21.8078 11.7158 21.7141L16.0058 17.4141L20.2958 21.7141C20.3888 21.8078 20.4994 21.8822 20.6212 21.933C20.7431 21.9838 20.8738 22.0099 21.0058 22.0099C21.1378 22.0099 21.2685 21.9838 21.3904 21.933C21.5122 21.8822 21.6228 21.8078 21.7158 21.7141C21.8095 21.6211 21.8839 21.5105 21.9347 21.3887C21.9855 21.2668 22.0116 21.1361 22.0116 21.0041C22.0116 20.8721 21.9855 20.7414 21.9347 20.6195C21.8839 20.4977 21.8095 20.3871 21.7158 20.2941L17.4158 16.0041Z" fill="black" />
+                  </svg>
+                </div>
+                <h3 className="mt-8 text-2xl text-center">Terima kasih telah melakukan pendaftaran pada Rumah Belajar Electrum.</h3>
+                <a className="block mt-8 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${msg}`}>
+                  <button className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
+                    Hubungi Kami
+                  </button>
+                </a>
+                <Link href="/">
+                  <a className="block mt-4 text-primary-green font-semibold">Kembali ke beranda</a>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )
+      }
       <Nav />
       <div className="relative">
         <div className="absolute top-0 h-32 w-full z-10" style={{
@@ -399,14 +762,25 @@ const RegisterStudent = () => {
               <div className="w-full lg:w-1/2 mt-8 px-3">
                 <h4 className="text-xl font-bold">Pilih Paket</h4>
                 <ReactDropdown options={[
-                  `8 Sesi`, `24 Sesi`, `48 Sesi`
-                ]} value={form.package} onChange={opt => updateForm('package', opt.value)} placeholder="Pilih Paket" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                  { label: `1 Sesi`, value: 1 },
+                  { label: `8 Sesi`, value: 8 },
+                  { label: `24 Sesi`, value: 24 },
+                  { label: `48 Sesi`, value: 48 },
+                ]} value={form.package ? {
+                  label: `${form.package} Sesi`,
+                  value: form.package
+                } : ''} onChange={opt => updateForm('package', opt.value)} placeholder="Pilih Paket" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
-              <div className="w-full lg:w-1/2 mt-8 px-3">
-                <h4 className="text-xl font-bold">Estimasi</h4>
-                <p className="mt-3">Program SMA Kelas XII, Jumlah 3 Orang. Paket 24 Sesi.</p>
-                <h4 className="mt-3 text-2xl font-bold">Rp9.720.000,00</h4>
-              </div>
+              {
+                priceEst && (
+                  <div className="w-full lg:w-1/2 mt-8 px-3">
+                    <h4 className="text-xl font-bold">Estimasi</h4>
+                    <p className="mt-3">{priceEst.msg}</p>
+                    <h4 className="mt-3 text-4xl font-bold">{priceEst.price}</h4>
+                    <a href="/pricing" target="_blank" className="text-primary-green font-semibold block mt-4">Lihat rincian biaya lainnya</a>
+                  </div>
+                )
+              }
             </div>
             <div className="flex flex-wrap mt-6 -mx-3">
               <div className="w-full lg:w-1/2 px-3 mt-4">

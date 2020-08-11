@@ -306,7 +306,7 @@ const default_subjects = [
 const RegisterStudent = () => {
   const router = useRouter()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
   const [form, setForm] = useState({
     fullname: router.query.fullname || '',
     class: router.query.class || '',

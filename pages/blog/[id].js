@@ -10,11 +10,11 @@ const Post = ({ post, footer }) => {
         minHeight: `16rem`,
         maxHeight: `20rem`
       }}>
-        {/* <div className="absolute top-0 w-full h-full z-10" style={{
+        <div className="absolute top-0 w-full h-full z-10" style={{
           backgroundImage: `url(${post.img})`,
           backgroundSize: `cover`,
           backgroundPosition: `center`
-        }}></div> */}
+        }}></div>
       </div>
       <div className="px-4 pb-16">
         <div className="max-w-3xl m-auto bg-white rounded-md p-4 lg:p-8 -mt-16 relative z-10">

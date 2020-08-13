@@ -2,6 +2,7 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import Link from 'next/link'
 import Axios from 'axios'
+import htmlToText from 'html-to-text'
 
 const posts = [
   {
@@ -57,12 +58,13 @@ const PostItem = ({ post }) => {
           <div className="overflow-hidden mt-2" style={{
             maxHeight: `72px`
           }}>
-            <div dangerouslySetInnerHTML={{
-              __html: post.body
-            }}></div>
+            <p>{htmlToText.fromString(post.body, {
+              ignoreHref: true,
+              ignoreImage: true,
+            })}</p>
           </div>
           <div className="mt-2">
-            <p>{new Date(Number(post.createdAt)).toLocaleString()}</p>
+            <p>{new Date(post.createdAt).toLocaleString()}</p>
           </div>
         </div>
       </Link>

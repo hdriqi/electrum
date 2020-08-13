@@ -85,7 +85,7 @@ const RegisterTutor = () => {
   })
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [chosenSubject, setChosenSubject] = useState([])
-  const [schedules, setSchedules] = useState([{}, {}, {}, {}])
+  const [schedules, setSchedules] = useState([{}, {}])
   const [chosenAreas, setChosenArea] = useState([])
 
   const formValidation = () => {
@@ -333,7 +333,7 @@ const RegisterTutor = () => {
                   <div className="flex items-top" key={idx}>
                     <InputSchedule value={sch} className="w-10/12" chosenSchedule={schedules} cb={sch => updateSchedule(idx, sch)} />
                     {
-                      idx > 3 && (
+                      idx > 1 && (
                         <div className="w-2/12 px-1">
                           <svg className="m-auto cursor-pointer mt-12" onClick={_ => removeSchedule(idx)} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="16" cy="16" r="16" fill="#EB5757" fill-opacity="0.1" />

@@ -2,6 +2,7 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
 import FooterCTA from '../components/FooterCTA'
+import Axios from 'axios'
 
 const data = {
   slides: [
@@ -14,7 +15,7 @@ const data = {
       url: `/blog/123`
     }
   ],
-  whyUs: [
+  why: [
     {
       icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
       title: 'Laporan Progress',
@@ -127,7 +128,7 @@ export default function Home() {
         <h3 className="text-3xl font-bold">Kenapa Harus Memilih Electrum</h3>
         <div className="flex flex-wrap -mx-3 lg:-mx-12">
           {
-            data.whyUs.map(data => {
+            data.why.map(data => {
               return (
                 <div className="w-1/2 lg:w-1/4 px-3 lg:px-12 mt-12 lg:mt-20">
                   <div>
@@ -264,4 +265,24 @@ export default function Home() {
       <Footer />
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const slides = await Axios.get(`${process.env.BASE_URL}/api/collections/slides`)
+  const why = await Axios.get(`${process.env.BASE_URL}/api/collections/why`)
+  
+  const data = {
+    slides: slides.data.data,
+    why: why.data.data
+  }
+
+  console.log(data)
+
+  return {
+    props: {
+      // data: {
+      //   slides: 
+      // }
+    }, // will be passed to the page component as props
+  }
 }

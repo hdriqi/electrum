@@ -85,6 +85,13 @@ const Nav = () => {
             <div className="flex items-center justify-center">
               <div className="text-center">
                 <div className="px-4">
+                  <Link href="/">
+                    <a>
+                      <h4 className="text-2xl font-semibold">Home</h4>
+                    </a>
+                  </Link>
+                </div>
+                <div className="px-4 pt-8">
                   <Link href="/register/student">
                     <a>
                       <h4 className="text-2xl font-semibold">Daftar Sekarang</h4>
@@ -111,6 +118,7 @@ const Nav = () => {
                   </svg>
                   <h4 className="text-primary-green pl-2 text-2xl font-semibold">(021) 6283 2717</h4>
                 </div>
+                <p className="pt-2">Jam Kerja 09.00 - 17.00 WIB</p>
               </div>
             </div>
           </div>

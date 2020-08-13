@@ -319,6 +319,7 @@ const RegisterStudent = () => {
     parentEmail: '',
     addressProvince: '',
     addressCity: '',
+    addressDistrict: '',
     addressDetail: '',
     tutorNote: '',
     package: null
@@ -403,6 +404,7 @@ const RegisterStudent = () => {
       form.parentPhoneNumber.length > 0 &&
       form.addressProvince.length > 0 &&
       form.addressCity.length > 0 &&
+      form.addressDistrict.length > 0 &&
       form.addressDetail.length > 0 &&
       additionalStudents.every((fullName) => fullName.length > 0)
     ) {
@@ -427,6 +429,13 @@ const RegisterStudent = () => {
   const updateForm = (key, value) => {
     const clone = { ...form }
     clone[key] = value
+    if (key === 'addressProvince') {
+      clone.addressCity = ''
+      clone.addressDistrict = ''
+    }
+    if (key === 'addressCity') {
+      clone.addressDistrict = ''
+    }
     setForm(clone)
   }
 
@@ -508,6 +517,29 @@ const RegisterStudent = () => {
 
   const phoneNumber = `082134567890`
   const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
+
+  const [provinceFilter, setProvinceFilter] = useState([])
+  const [cityFilter, setCityFilter] = useState([])
+  const [districtFilter, setDistrictFilter] = useState([])
+
+  useEffect(() => {
+    const newProvince = province.map(p => p.province)
+    setProvinceFilter(newProvince)
+  }, [])
+
+  useEffect(() => {
+    if (form.addressProvince && form.addressProvince.length > 0) {
+      const newCity = province.find(p => p.province === form.addressProvince).city.map(c => c.city)
+      setCityFilter(newCity)
+      
+      if (form.addressCity && form.addressCity.length > 0) {
+        const newDistrict = province.find(p => p.province === form.addressProvince)?.city.find(c => c.city === form.addressCity)?.district.map(d => d.district) || []
+        setDistrictFilter(newDistrict)
+      }
+    }
+  }, [form])
+
+  console.log(provinceFilter, cityFilter, districtFilter)
 
   return (
     <div className="bg-gray-100">
@@ -629,7 +661,7 @@ const RegisterStudent = () => {
               <div className="w-1/4 mt-3 px-3">
                 <label className="block">Gelar</label>
                 <ReactDropdown options={[
-                  'Ny.', 'Tn.', 'Ibu', 'Bpk.'
+                  'Ibu', 'Bpk.'
                 ]} value={form.parentTitle} onChange={opt => updateForm('parentTitle', opt.value)} placeholder="Pilih Gelar" controlClassName="truncate w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
               <div className="w-3/4 mt-3 px-3">
@@ -654,11 +686,15 @@ const RegisterStudent = () => {
             <div className="flex flex-wrap -mx-3">
               <div className="w-full lg:w-1/2 mt-3 px-3">
                 <label className="block">Provinsi</label>
-                <ReactDropdown value={form.addressProvince} onChange={opt => updateForm('addressProvince', opt.value)} options={province} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                <ReactDropdown value={form.addressProvince} onChange={opt => updateForm('addressProvince', opt.value)} options={provinceFilter} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
               <div className="w-full lg:w-1/2 mt-3 px-3">
                 <label className="block">Kabupaten/Kota</label>
-                <ReactDropdown value={form.addressCity} onChange={opt => updateForm('addressCity', opt.value)} options={city} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+                <ReactDropdown value={form.addressCity} onChange={opt => updateForm('addressCity', opt.value)} options={cityFilter} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+              </div>
+              <div className="w-full lg:w-1/2 mt-3 px-3">
+                <label className="block">Kecamatan</label>
+                <ReactDropdown value={form.addressDistrict} onChange={opt => updateForm('addressDistrict', opt.value)} options={districtFilter} placeholder="Pilih Kecamatan" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
               </div>
             </div>
             <div className="mt-3">
@@ -762,7 +798,6 @@ const RegisterStudent = () => {
               <div className="w-full lg:w-1/2 mt-8 px-3">
                 <h4 className="text-xl font-bold">Pilih Paket</h4>
                 <ReactDropdown options={[
-                  { label: `1 Sesi`, value: 1 },
                   { label: `8 Sesi`, value: 8 },
                   { label: `24 Sesi`, value: 24 },
                   { label: `48 Sesi`, value: 48 },

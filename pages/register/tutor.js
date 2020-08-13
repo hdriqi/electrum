@@ -104,7 +104,7 @@ const RegisterTutor = () => {
       form.eduGPA.length > 0 &&
       // form.attachment.length > 0 && 
       chosenSubject.length > 0 &&
-      schedules.length > 3 &&
+      schedules.length > 1 &&
       chosenAreas.length > 0
     ) {
       return true
@@ -325,7 +325,7 @@ const RegisterTutor = () => {
         </div>
         <div className="mt-8">
           <h4 className="text-xl font-bold">Waktu Mengajar</h4>
-          <p className="mt-2">Harus memilih <b>minimal 4 waktu</b> yang diinginkan</p>
+          <p className="mt-2">Harus memilih <b>minimal 2 waktu</b> yang diinginkan</p>
           <div className="mt-3">
             {
               schedules.map((sch, idx) => {

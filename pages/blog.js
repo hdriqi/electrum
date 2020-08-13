@@ -1,6 +1,7 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import Link from 'next/link'
+import Axios from 'axios'
 
 const posts = [
   {
@@ -40,7 +41,7 @@ const posts = [
   }
 ]
 
-const PostItem = ({ post, footer }) => {
+const PostItem = ({ post }) => {
   return (
     <div className="w-full lg:w-1/3 px-3 overflow-hidden mt-6" style={{
       height: `400px`
@@ -56,7 +57,9 @@ const PostItem = ({ post, footer }) => {
           <div className="overflow-hidden mt-2" style={{
             maxHeight: `72px`
           }}>
-            <p>{post.body}</p>
+            <div dangerouslySetInnerHTML={{
+              __html: post.body
+            }}></div>
           </div>
           <div className="mt-2">
             <p>{new Date(Number(post.createdAt)).toLocaleString()}</p>
@@ -67,7 +70,7 @@ const PostItem = ({ post, footer }) => {
   )
 }
 
-const Blog = () => {
+const Blog = ({ news, footer }) => {
   return (
     <div>
       <Nav footer={footer} />
@@ -80,7 +83,7 @@ const Blog = () => {
       <div className="max-w-5xl m-auto px-4 py-16">
         <div className="flex flex-wrap -mx-3">
           {
-            posts.map(post => {
+            news.map(post => {
               return (
                 <PostItem post={post} />
               )
@@ -91,6 +94,16 @@ const Blog = () => {
       <Footer footer={footer} />
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const news = await Axios.get(`${process.env.BASE_URL}/api/collections/news`)
+  
+  return {
+    props: {
+      news: news.data.data
+    },
+  }
 }
 
 export default Blog

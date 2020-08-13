@@ -1,6 +1,7 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import FooterCTA from '../components/FooterCTA'
+import Axios from 'axios'
 
 const about = {
   intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ridiculus sed fermentum vulputate lacinia dictumst in dapibus. Duis turpis ac facilisis pellentesque porttitor a, amet. In cursus velit quisque vivamus placerat malesuada.',
@@ -34,7 +35,7 @@ const about = {
   ]
 }
 
-export default function Home({ footer }) {
+export default function Home({ teams, footer }) {
   return (
     <div>
       <Nav footer={footer} />
@@ -74,10 +75,10 @@ export default function Home({ footer }) {
           <h3 className="text-3xl font-bold text-center">Tim Kami</h3>
           <div className="flex flex-wrap mt-8 -mx-3">
             {
-              about.teams.map((team, idx) => {
+              teams.map((team, idx) => {
                 return (
-                  <div className="w-full lg:w-1/4 px-3 pt-8" key={idx}>
-                    <div className="flex items-center lg:flex-col -mx-3">
+                  <div className="w-full lg:w-1/3 px-3 pt-8" key={idx}>
+                    <div className="flex flex-col items-center -mx-3">
                       <div className="px-3 w-full">
                         <div className="w-full relative overflow-hidden" style={{
                           paddingBottom: `100%`
@@ -86,9 +87,11 @@ export default function Home({ footer }) {
                         </div>
                       </div>
                       <div className="px-3">
-                        <h4 className="text-lg font-semibold">{team.name}</h4>
+                        <h4 className="text-lg font-semibold mt-2">{team.name}</h4>
                         <h4 className="text-sm font-semibold mt-2">{team.position}</h4>
-                        <p className="mt-4">{team.quotes}</p>
+                        <div className="mt-4" dangerouslySetInnerHTML={{
+                          __html: team.quotes
+                        }}></div>
                       </div>
                     </div>
                   </div>
@@ -107,4 +110,14 @@ export default function Home({ footer }) {
       <Footer footer={footer} />
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const teams = await Axios.get(`${process.env.BASE_URL}/api/collections/team`)
+  
+  return {
+    props: {
+      teams: teams.data.data
+    },
+  }
 }

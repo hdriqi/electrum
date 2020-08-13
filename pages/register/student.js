@@ -2,7 +2,7 @@ import Nav from '../../components/Nav'
 import { useState, useEffect } from 'react'
 import Footer from '../../components/Footer'
 import ReactDropdown from 'react-dropdown'
-import { province, city } from '../../utils/common'
+import { province, city, capitalize } from '../../utils/common'
 import InputSchedule from '../../components/InputSchedule'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -533,13 +533,11 @@ const RegisterStudent = () => {
       setCityFilter(newCity)
       
       if (form.addressCity && form.addressCity.length > 0) {
-        const newDistrict = province.find(p => p.province === form.addressProvince)?.city.find(c => c.city === form.addressCity)?.district.map(d => d.district) || []
+        const newDistrict = province.find(p => p.province === form.addressProvince)?.city.find(c => c.city === form.addressCity)?.district.map(d => capitalize(d.district)) || []
         setDistrictFilter(newDistrict)
       }
     }
   }, [form])
-
-  console.log(provinceFilter, cityFilter, districtFilter)
 
   return (
     <div className="bg-gray-100">

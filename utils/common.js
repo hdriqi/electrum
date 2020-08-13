@@ -3,7 +3,41 @@ export const province = [
     province: 'Banten',
     city: [
       {
-        city: 'Tangerang',
+        city: 'Kab. Tangerang',
+        district: [
+          { district: 'CISOKA' },
+          { district: 'SOLEAR' },
+          { district: 'TIGARAKSA' },
+          { district: 'JAMBE' },
+          { district: 'CIKUPA' },
+          { district: 'PANONGAN' },
+          { district: 'CURUG' },
+          { district: 'KELAPA DUA' },
+          { district: 'LEGOK' },
+          { district: 'PAGEDANGAN' },
+          { district: 'CISAUK' },
+          { district: 'PASARKEMIS' },
+          { district: 'SINDANG JAYA' },
+          { district: 'BALARAJA' },
+          { district: 'JAYANTI' },
+          { district: 'SUKAMULYA' },
+          { district: 'KRESEK' },
+          { district: 'GUNUNG KALER' },
+          { district: 'KRONJO' },
+          { district: 'MEKAR BARU' },
+          { district: 'MAUK' },
+          { district: 'KEMIRI' },
+          { district: 'SUKADIRI' },
+          { district: 'RAJEG' },
+          { district: 'SEPATAN' },
+          { district: 'SEPATAN TIMUR' },
+          { district: 'PAKUHAJI' },
+          { district: 'TELUKNAGA' },
+          { district: 'KOSAMBI' },
+        ]
+      },
+      {
+        city: 'Kota Tangerang',
         district: [
           { district: 'CILEDUG' },
           { district: 'LARANGAN' },
@@ -21,7 +55,7 @@ export const province = [
         ]
       },
       {
-        city: 'Tangerang Selatan',
+        city: 'Kota Tangerang Selatan',
         district: [
           { district: 'SETU' },
           { district: 'SERPONG' },
@@ -110,7 +144,80 @@ export const province = [
     province: 'Jawa Barat',
     city: [
       {
-        city: 'Bekasi',
+        city: 'Kab. Bekasi',
+        district: [
+          { district: 'SETU' },
+          { district: 'SERANG BARU' },
+          { district: 'CIKARANG PUSAT' },
+          { district: 'CIKARANG SELATAN' },
+          { district: 'CIBARUSAH' },
+          { district: 'BOJONGMANGU' },
+          { district: 'CIKARANG TIMUR' },
+          { district: 'KEDUNGWARINGIN' },
+          { district: 'CIKARANG UTARA' },
+          { district: 'KARANGBAHAGIA' },
+          { district: 'CIBITUNG' },
+          { district: 'CIKARANG BARAT' },
+          { district: 'TAMBUN SELATAN' },
+          { district: 'TAMBUN UTARA' },
+          { district: 'BABELAN' },
+          { district: 'TARUMAJAYA' },
+          { district: 'TAMBELANG' },
+          { district: 'SUKAWANGI' },
+          { district: 'SUKATANI' },
+          { district: 'SUKAKARYA' },
+          { district: 'PEBAYURAN' },
+          { district: 'CABANGBUNGIN' },
+          { district: 'MUARA GEMBONG' },
+        ]
+      },
+      {
+        city: 'Kab. Bogor',
+        district: [
+          { district: 'NANGGUNG' },
+          { district: 'LEUWILIANG' },
+          { district: 'LEUWISADENG' },
+          { district: 'PAMIJAHAN' },
+          { district: 'CIBUNGBULANG' },
+          { district: 'CIAMPEA' },
+          { district: 'TENJOLAYA' },
+          { district: 'DRAMAGA' },
+          { district: 'CIOMAS' },
+          { district: 'TAMANSARI' },
+          { district: 'CIJERUK' },
+          { district: 'CIGOMBONG' },
+          { district: 'CARINGIN' },
+          { district: 'CIAWI' },
+          { district: 'CISARUA' },
+          { district: 'MEGAMENDUNG' },
+          { district: 'SUKARAJA' },
+          { district: 'BABAKAN MADANG' },
+          { district: 'SUKAMAKMUR' },
+          { district: 'CARIU' },
+          { district: 'TANJUNGSARI' },
+          { district: 'JONGGOL' },
+          { district: 'CILEUNGSI' },
+          { district: 'KELAPA NUNGGAL' },
+          { district: 'GUNUNG PUTRI' },
+          { district: 'CITEUREUP' },
+          { district: 'CIBINONG' },
+          { district: 'BOJONG GEDE' },
+          { district: 'TAJUR HALANG' },
+          { district: 'KEMANG' },
+          { district: 'RANCA BUNGUR' },
+          { district: 'PARUNG' },
+          { district: 'CISEENG' },
+          { district: 'GUNUNG SINDUR' },
+          { district: 'RUMPIN' },
+          { district: 'CIGUDEG' },
+          { district: 'SUKAJAYA' },
+          { district: 'JASINGA' },
+          { district: 'TENJO' },
+          { district: 'PARUNG PANJANG' },
+        ]
+      },
+      {
+        city: 'Kota Bekasi',
         district: [
           { district: 'CILEDUG' },
           { district: 'LARANGAN' },
@@ -128,7 +235,7 @@ export const province = [
         ]
       },
       {
-        city: 'Depok',
+        city: 'Kota Depok',
         district: [
           { district: 'SETU' },
           { district: 'SERPONG' },
@@ -140,7 +247,7 @@ export const province = [
         ]
       },
       {
-        city: 'Bogor',
+        city: 'Kota Bogor',
         district: [
           { district: 'SETU' },
           { district: 'SERPONG' },
@@ -166,6 +273,10 @@ export const city = [
   "Tangerang",
   "Tangerang Selatan",
 ]
+
+export const capitalize = (word) => {
+  return word[0].toUpperCase() + word.slice(1).toLowerCase()
+}
 
 export const schedules = [
   {

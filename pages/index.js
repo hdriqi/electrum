@@ -85,10 +85,10 @@ const ResponsiveCarousel = ({ children }) => {
   )
 }
 
-export default function Home() {
+export default function Home({ footer }) {
   return (
     <div>
-      <Nav />
+      <Nav footer={footer} />
       <div>
         <ResponsiveCarousel>
           <Slider>
@@ -262,7 +262,7 @@ export default function Home() {
           <FooterCTA />
         </div>
       </div>
-      <Footer />
+      <Footer footer={footer} />
     </div>
   )
 }
@@ -276,13 +276,11 @@ export async function getServerSideProps(context) {
     why: why.data.data
   }
 
-  console.log(data)
+  // console.log(data)
 
   return {
     props: {
-      // data: {
-      //   slides: 
-      // }
+      // footer: info.data.data[0]
     }, // will be passed to the page component as props
   }
 }

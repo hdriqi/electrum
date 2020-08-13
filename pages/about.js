@@ -34,10 +34,10 @@ const about = {
   ]
 }
 
-export default function Home() {
+export default function Home({ footer }) {
   return (
     <div>
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0">
           <img className="object-cover w-full h-full" src="https://images.pexels.com/photos/1181438/pexels-photo-1181438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
@@ -104,7 +104,7 @@ export default function Home() {
           <FooterCTA />
         </div>
       </div>
-      <Footer />
+      <Footer footer={footer} />
     </div>
   )
 }

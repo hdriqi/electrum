@@ -40,7 +40,7 @@ const posts = [
   }
 ]
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, footer }) => {
   return (
     <div className="w-full lg:w-1/3 px-3 overflow-hidden mt-6" style={{
       height: `400px`
@@ -70,7 +70,7 @@ const PostItem = ({ post }) => {
 const Blog = () => {
   return (
     <div>
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0 w-full bg-primary-green z-10"></div>
         <div className="max-w-3xl m-auto px-3 py-16 relative z-10">
@@ -88,7 +88,7 @@ const Blog = () => {
           }
         </div>
       </div>
-      <Footer />
+      <Footer footer={footer} />
     </div>
   )
 }

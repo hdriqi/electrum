@@ -311,7 +311,7 @@ const filter = [
 
 const levelOpts = filter.map(x => x.level)
 
-const Pricing = () => {
+const Pricing = ({ footer }) => {
   const [level, setLevel] = useState('SD')
   const [chosenClass, setChosenClass] = useState('1-6')
   const [classOpts, setClassOpts] = useState(['1-6'])
@@ -334,7 +334,7 @@ const Pricing = () => {
 
   return (
     <div>
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0 w-full bg-primary-green z-10"></div>
         <div className="max-w-3xl m-auto px-3 py-16 relative z-10">
@@ -389,7 +389,7 @@ const Pricing = () => {
           </table>
         </div>
       </div>
-      <Footer />
+      <Footer footer={footer} />
     </div>
   )
 }

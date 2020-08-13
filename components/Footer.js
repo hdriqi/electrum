@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
-const footer = {
-  address: `Jl Boulevard Artha Gading Rukan Artha Gading Niaga Bl D/21. Kelapa Gading Barat, Jakarta Utara,
-  DKI Jakarta 11223.`,
-  email: `info@bimbelelektrum.com`,
-  phoneNumber: `(021) 8285 6764`
-}
+// const footer = {
+//   address: `Jl Boulevard Artha Gading Rukan Artha Gading Niaga Bl D/21. Kelapa Gading Barat, Jakarta Utara,
+//   DKI Jakarta 11223.`,
+//   email: `info@bimbelelektrum.com`,
+//   phoneNumber: `(021) 8285 6764`
+// }
 
-const Footer = () => {
+const Footer = ({ footer }) => {
   return (
     <div className=" border-t border-gray-300 bg-white">
       <div className="max-w-6xl px-4 m-auto py-16">
@@ -25,7 +25,7 @@ const Footer = () => {
           <div className="w-full lg:w-4/12 px-3 pt-8 lg:pt-0">
             <h4 className="text-lg font-semibold">Kantor Kami</h4>
             <div className="mt-2">
-              <p>{footer.address}</p>
+              <p>{footer.office}</p>
             </div>
           </div>
           <div className="w-full lg:w-4/12 px-3 pt-8 lg:pt-0">

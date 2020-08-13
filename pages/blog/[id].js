@@ -8,10 +8,10 @@ const data = {
   createdAt: new Date().getTime()
 }
 
-const Post = () => {
+const Post = ({ footer }) => {
   return (
     <div className="bg-gray-100">
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative h-screen" style={{
         minHeight: `16rem`,
         maxHeight: `20rem`
@@ -29,7 +29,7 @@ const Post = () => {
           <p className="mt-4">{data.body}</p>
         </div>
       </div>
-      <Footer />
+      <Footer footer={footer} />
     </div>
   )
 }

@@ -303,7 +303,7 @@ const default_subjects = [
   'Biologi SMA',
 ]
 
-const RegisterStudent = () => {
+const RegisterStudent = ({ footer }) => {
   const router = useRouter()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [step, setStep] = useState(0)
@@ -568,7 +568,7 @@ const RegisterStudent = () => {
           </div>
         )
       }
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative">
         <div className="absolute top-0 h-32 w-full z-10" style={{
           background: `linear-gradient(180deg, #2FDE9B 0%, rgba(47, 222, 155, 0) 100%)`
@@ -827,7 +827,7 @@ const RegisterStudent = () => {
         )
       }
       <div className="pt-16">
-        <Footer />
+        <Footer footer={footer} />
       </div>
     </div>
   )

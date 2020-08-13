@@ -62,7 +62,7 @@ const default_area = [
   }
 ]
 
-const RegisterTutor = () => {
+const RegisterTutor = ({ footer }) => {
   const phoneNumber = `082134567890`
   const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
 
@@ -208,7 +208,7 @@ const RegisterTutor = () => {
           </div>
         )
       }
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative">
         <div className="absolute top-0 h-32 w-full z-10" style={{
           background: `linear-gradient(180deg, #2FDE9B 0%, rgba(47, 222, 155, 0) 100%)`
@@ -379,7 +379,7 @@ const RegisterTutor = () => {
         </div>
       </div >
       <div className="pt-16">
-        <Footer />
+        <Footer footer={footer} />
       </div>
     </div >
   )

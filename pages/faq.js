@@ -1,21 +1,22 @@
 import Nav from '../components/Nav'
 import { useState } from 'react'
 import Footer from '../components/Footer'
+import Axios from 'axios'
 
-const faqs = [
-  {
-    question: 'Bagaimana cara melakukan pendaftaran?',
-    answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-  },
-  {
-    question: 'Apakah boleh memilih lebih dari satu jadwal?',
-    answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-  },
-  {
-    question: 'Bagaimana cara menjadi tentor?',
-    answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-  }
-]
+// const faqs = [
+//   {
+//     question: 'Bagaimana cara melakukan pendaftaran?',
+//     answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
+//   },
+//   {
+//     question: 'Apakah boleh memilih lebih dari satu jadwal?',
+//     answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
+//   },
+//   {
+//     question: 'Bagaimana cara menjadi tentor?',
+//     answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
+//   }
+// ]
 
 const FAQItem = ({ faq }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -51,13 +52,13 @@ const FAQItem = ({ faq }) => {
   )
 }
 
-const FAQ = () => {
+const FAQ = ({ faqs, footer }) => {
   const phoneNumber = `082134567890`
   const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
 
   return (
     <div>
-      <Nav />
+      <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0 w-full bg-primary-green z-10"></div>
         <div className="max-w-3xl m-auto px-3 py-16 relative z-10">
@@ -81,9 +82,19 @@ const FAQ = () => {
           </a>
         </div>
       </div >
-      <Footer />
+      <Footer footer={footer} />
     </div >
   )
+}
+
+export async function getServerSideProps(context) {
+  const faq = await Axios.get(`${process.env.BASE_URL}/api/collections/faq`)
+
+  return {
+    props: {
+      faqs: faq.data.data
+    },
+  }
 }
 
 export default FAQ

@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
 import FooterCTA from '../components/FooterCTA'
 import Axios from 'axios'
+import Link from 'next/link'
 
 const data = {
   slides: [
@@ -41,11 +42,12 @@ const data = {
     {
       name: 'Metode 1',
       img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-      desc: ``
+      desc: `Electrum menawarkan program kemitraan dengan insentif menarik dan kompetitif untuk para pengajar bertalenta untuk membagikan ilmu dan pengalaman kepada murid-murid kami yang ingin mewujudkan potensi-potensi mereka untuk menguasai materi dan konsep secara mendalam dari mata pelajaran.`
     },
     {
       name: 'Metode 2',
-      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`
+      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
+      desc: `Lorem ipsum dolor amet`
     }
   ],
   testimonials: [
@@ -62,7 +64,7 @@ const data = {
   ]
 }
 
-const ResponsiveCarousel = ({ children }) => {
+const ResponsiveCarousel = ({ data, children }) => {
   return (
     <div className="relative">
       <CarouselProvider
@@ -85,18 +87,27 @@ const ResponsiveCarousel = ({ children }) => {
   )
 }
 
-export default function Home({ footer }) {
+export default function Home({ data, footer }) {
+  console.log(data)
   return (
     <div>
       <Nav footer={footer} />
       <div>
-        <ResponsiveCarousel>
+        <ResponsiveCarousel data={data}>
           <Slider>
             {
               data.slides.map((slide, idx) => {
                 return (
                   <Slide index={idx}>
-                    <img className="w-full h-full object-cover" src={slide.img} />
+                    {
+                      slide.url ? (
+                        <Link href={slide.url}>
+                          <img className="cursor-pointer w-full h-full object-cover" src={slide.img} />
+                        </Link>
+                      ) : (
+                          <img className="cursor-pointer w-full h-full object-cover" src={slide.img} />
+                        )
+                    }
                   </Slide>
                 )
               })
@@ -158,8 +169,8 @@ export default function Home({ footer }) {
         </div>
       </div>
       <div className="bg-primary-navy overflow-hidden relative">
-        <div className="hidden lg:block absolute h-full w-1/2 z-10 bg-primary-navy"></div>
-        <div className="max-w-6xl m-auto">
+        {/* <div className="hidden lg:block absolute h-full w-1/3 z-10 bg-primary-navy"></div> */}
+        <div className="max-w-xl m-auto">
           <CarouselProvider
             naturalSlideWidth={100}
             naturalSlideHeight={75}
@@ -167,10 +178,9 @@ export default function Home({ footer }) {
             className="carousel-peek"
           >
             <div className="flex flex-wrap relative">
-              <div className="w-full lg:w-1/2 relative z-10 px-4 pt-8">
-                <h4 className="text-2xl text-white font-bold">Menggunakan Metode Pembelajaran</h4>
-                <h3 className="text-3xl text-white font-bold pt-4">Minischool</h3>
-                <div className="flex pt-16">
+              <div className="w-full relative z-10 px-4 pt-8 bg-primary-navy flex flex-col items-center">
+                <h4 className="text-3xl text-white font-bold">Program Electrum</h4>
+                <div className="flex pt-8">
                   <ButtonBack>
                     <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="24" cy="24" r="24" fill="white" fill-opacity="0.2" />
@@ -185,14 +195,25 @@ export default function Home({ footer }) {
                   </ButtonNext>
                 </div>
               </div>
-              <div className="w-full lg:w-1/2 pt-8">
+              <div className="w-full pt-8">
                 <Slider>
                   {
                     data.methods.map(method => {
                       return (
                         <Slide>
                           <div className="px-4">
-                            <img className="w-full h-full object-cover rounded-md overflow-hidden" src={method.img} />
+                            <div className="relative overflow-hidden" style={{
+                              paddingBottom: `75%`
+                            }}>
+                              <img className="absolute w-full h-full object-cover rounded-md overflow-hidden" src={method.img} />
+                              <div className="absolute inset-0 p-4 rounded-md" style={{
+                                background: `linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 59.75%)`
+                              }}>
+                                <div className="flex items-end h-full">
+                                  <p className="text-white">{method.description}</p>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </Slide>
                       )
@@ -270,17 +291,19 @@ export default function Home({ footer }) {
 export async function getServerSideProps(context) {
   const slides = await Axios.get(`${process.env.BASE_URL}/api/collections/slides`)
   const why = await Axios.get(`${process.env.BASE_URL}/api/collections/why`)
-  
+  const methods = await Axios.get(`${process.env.BASE_URL}/api/collections/methods`)
+  const testimonials = await Axios.get(`${process.env.BASE_URL}/api/collections/testimonials`)
+
   const data = {
     slides: slides.data.data,
-    why: why.data.data
+    why: why.data.data,
+    methods: methods.data.data,
+    testimonials: testimonials.data.data
   }
-
-  // console.log(data)
 
   return {
     props: {
-      // footer: info.data.data[0]
-    }, // will be passed to the page component as props
+      data: data
+    },
   }
 }

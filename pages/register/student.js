@@ -6,6 +6,7 @@ import { province, city, capitalize } from '../../utils/common'
 import InputSchedule from '../../components/InputSchedule'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Axios from 'axios'
 
 const pricing = [
   {
@@ -314,7 +315,7 @@ const RegisterStudent = ({ footer }) => {
     stuPhoneNumber: '',
     stuEmail: '',
     parentTitle: '',
-    parentFullname: '',
+    parentName: '',
     parentPhoneNumber: '',
     parentEmail: '',
     addressProvince: '',
@@ -379,19 +380,16 @@ const RegisterStudent = ({ footer }) => {
     }
   }, [form, additionalStudents])
 
-  const _submit = () => {
+  const _submit = async () => {
     const data = {
       ...form,
       ...{ additionalStudents: additionalStudents },
       ...{ subjects: chosenSubject },
-      ...{ schedules: schedules }
+      ...{ schedules: schedules },
+      ...{ teacher: tutorPreference }
     }
-    console.log(data)
+    const response = await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data)
     setShowConfirmModal(true)
-    // console.log(form)
-    // console.log(additionalStudents)
-    // console.log(chosenSubject)
-    // console.log(schedules)
   }
 
   const step1FormValidation = () => {
@@ -400,7 +398,7 @@ const RegisterStudent = ({ footer }) => {
       form.class.length > 0 &&
       form.schoolName.length > 0 &&
       form.parentTitle.length > 0 &&
-      form.parentFullname.length > 0 &&
+      form.parentName.length > 0 &&
       form.parentPhoneNumber.length > 0 &&
       form.addressProvince.length > 0 &&
       form.addressCity.length > 0 &&
@@ -419,7 +417,7 @@ const RegisterStudent = ({ footer }) => {
       schedules.length > 2 &&
       schedules.every(schedule => schedule.day && schedule.hour) &&
       tutorPreference.length > 0 &&
-      form.package.toString().length > 0
+      form.package && form.package.toString().length > 0
     ) {
       return true
     }
@@ -664,7 +662,7 @@ const RegisterStudent = ({ footer }) => {
               </div>
               <div className="w-3/4 mt-3 px-3">
                 <label className="block">Nama Lengkap</label>
-                <input type="text" value={form.parentFullname} onInput={e => updateForm('parentFullname', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
+                <input type="text" value={form.parentName} onInput={e => updateForm('parentName', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
               </div>
             </div>
             <div className="mt-3">

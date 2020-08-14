@@ -1,10 +1,11 @@
 import Nav from '../../components/Nav'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Footer from '../../components/Footer'
 import InputSchedule from '../../components/InputSchedule'
 import ReactDropdown from 'react-dropdown'
-import { province, city } from '../../utils/common'
+import { province, city, capitalize } from '../../utils/common'
 import Link from 'next/link'
+import Axios from 'axios'
 
 const default_subjects = [
   'Calistung',
@@ -71,6 +72,7 @@ const RegisterTutor = ({ footer }) => {
     dateOfBirth: '',
     addressProvince: '',
     addressCity: '',
+    addressDistrict: '',
     addressDetail: '',
     transport: '',
     phoneNumber: '',
@@ -81,7 +83,7 @@ const RegisterTutor = ({ footer }) => {
     eduGPA: '',
     eduExp: '',
     eduAchievement: '',
-    attachment: ''
+    attachment: null
   })
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [chosenSubject, setChosenSubject] = useState([])
@@ -102,7 +104,7 @@ const RegisterTutor = ({ footer }) => {
       form.eduMajor.length > 0 &&
       form.eduGradYear.length > 0 &&
       form.eduGPA.length > 0 &&
-      // form.attachment.length > 0 && 
+      form.attachment &&
       chosenSubject.length > 0 &&
       schedules.length > 1 &&
       chosenAreas.length > 0
@@ -115,17 +117,34 @@ const RegisterTutor = ({ footer }) => {
   const updateForm = (key, value) => {
     const clone = { ...form }
     clone[key] = value
+    if (key === 'addressProvince') {
+      clone.addressCity = ''
+      clone.addressDistrict = ''
+    }
+    if (key === 'addressCity') {
+      clone.addressDistrict = ''
+    }
     setForm(clone)
   }
 
-  const _submit = () => {
+  const _submit = async () => {
     const data = {
       ...form,
       ...{ schedules: schedules },
       ...{ subjects: chosenSubject },
       ...{ areas: chosenAreas }
     }
-    console.log(data)
+    let mediaFile = new FormData()
+    mediaFile.append('file', form.attachment)
+    const fileUpload = await Axios.post(`${process.env.BASE_URL}/api/upload`, mediaFile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    const attachment = fileUpload.data.url
+    data.attachment = attachment
+    const tutorPost = await Axios.post(`${process.env.BASE_URL}/api/collections/tutor`, data)
+    console.log(tutorPost.data)
     setShowConfirmModal(true)
   }
 
@@ -178,6 +197,27 @@ const RegisterTutor = ({ footer }) => {
     cloneSchedules.push({})
     setSchedules(cloneSchedules)
   }
+
+  const [provinceFilter, setProvinceFilter] = useState([])
+  const [cityFilter, setCityFilter] = useState([])
+  const [districtFilter, setDistrictFilter] = useState([])
+
+  useEffect(() => {
+    const newProvince = province.map(p => p.province)
+    setProvinceFilter(newProvince)
+  }, [])
+
+  useEffect(() => {
+    if (form.addressProvince && form.addressProvince.length > 0) {
+      const newCity = province.find(p => p.province === form.addressProvince).city.map(c => c.city)
+      setCityFilter(newCity)
+
+      if (form.addressCity && form.addressCity.length > 0) {
+        const newDistrict = province.find(p => p.province === form.addressProvince)?.city.find(c => c.city === form.addressCity)?.district.map(d => capitalize(d.district)) || []
+        setDistrictFilter(newDistrict)
+      }
+    }
+  }, [form])
 
   return (
     <div className="bg-gray-100">
@@ -235,11 +275,15 @@ const RegisterTutor = ({ footer }) => {
         <div className="flex flex-wrap -mx-3">
           <div className="w-full lg:w-1/2 mt-3 px-3">
             <label className="block">Provinsi</label>
-            <ReactDropdown value={form.addressProvince} onChange={opt => updateForm('addressProvince', opt.value)} options={province} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+            <ReactDropdown value={form.addressProvince} onChange={opt => updateForm('addressProvince', opt.value)} options={provinceFilter} placeholder="Pilih Provinsi" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
           </div>
           <div className="w-full lg:w-1/2 mt-3 px-3">
             <label className="block">Kabupaten/Kota</label>
-            <ReactDropdown value={form.addressCity} onChange={opt => updateForm('addressCity', opt.value)} options={city} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+            <ReactDropdown value={form.addressCity} onChange={opt => updateForm('addressCity', opt.value)} options={cityFilter} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
+          </div>
+          <div className="w-full lg:w-1/2 mt-3 px-3">
+            <label className="block">Kecamatan</label>
+            <ReactDropdown value={form.addressDistrict} onChange={opt => updateForm('addressDistrict', opt.value)} options={districtFilter} placeholder="Pilih Kabupaten/Kota" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
           </div>
         </div>
         <div className="mt-3">

@@ -35,7 +35,8 @@ const about = {
   ]
 }
 
-export default function Home({ teams, footer }) {
+export default function Home({ company, teams, footer }) {
+  console.log(company)
   return (
     <div>
       <Nav footer={footer} />
@@ -46,7 +47,7 @@ export default function Home({ teams, footer }) {
         <div className="absolute inset-0 bg-primary-green opacity-75"></div>
         <div className="max-w-2xl m-auto px-4 py-40 text-center relative">
           <h3 className="text-3xl text-white font-bold">Halo! Selamat Datang di Bimbel Electrum</h3>
-          <p className="text-white mt-4">{about.intro}</p>
+          <p className="text-white mt-4 whitespace-pre-line">{company.intro}</p>
         </div>
         <div className="absolute w-full bottom-0">
           <div className="pb-8">
@@ -61,11 +62,11 @@ export default function Home({ teams, footer }) {
           <div className="flex flex-wrap -mx-3">
             <div className="w-full lg:w-1/2 px-3 pt-8 lg:pt-0">
               <h3 className="text-3xl font-bold">Visi</h3>
-              <p className="mt-4">{about.vision}</p>
+              <p className="mt-4">{company.vision}</p>
             </div>
             <div className="w-full lg:w-1/2 px-3 pt-8 lg:pt-0">
               <h3 className="text-3xl font-bold">Misi</h3>
-              <p className="mt-4">{about.mission}</p>
+              <p className="mt-4">{company.mission}</p>
             </div>
           </div>
         </div>
@@ -113,10 +114,12 @@ export default function Home({ teams, footer }) {
 }
 
 export async function getServerSideProps(context) {
+  const company = await Axios.get(`${process.env.BASE_URL}/api/collections/company?_id=5f35e9fb259f49369e35cdbf`)
   const teams = await Axios.get(`${process.env.BASE_URL}/api/collections/team`)
   
   return {
     props: {
+      company: company.data.data[0],
       teams: teams.data.data
     },
   }

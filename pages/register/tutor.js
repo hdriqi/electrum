@@ -134,6 +134,7 @@ const RegisterTutor = ({ footer }) => {
       ...{ subjects: chosenSubject },
       ...{ areas: chosenAreas }
     }
+    data.schedules = data.schedules.map(sch => (`${sch.day} ${sch.hour}`))
     let mediaFile = new FormData()
     mediaFile.append('file', form.attachment)
     const fileUpload = await Axios.post(`${process.env.BASE_URL}/api/upload`, mediaFile, {
@@ -144,7 +145,6 @@ const RegisterTutor = ({ footer }) => {
     const attachment = fileUpload.data.url
     data.attachment = attachment
     const tutorPost = await Axios.post(`${process.env.BASE_URL}/api/collections/tutor`, data)
-    console.log(tutorPost.data)
     setShowConfirmModal(true)
   }
 

@@ -42,7 +42,7 @@ export default function Home({ company, teams, footer }) {
       <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0">
-          <img className="object-cover w-full h-full" src="https://images.pexels.com/photos/1181438/pexels-photo-1181438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+          <img className="object-cover w-full h-full" src={company.img} />
         </div>
         <div className="absolute inset-0 bg-primary-green opacity-75"></div>
         <div className="max-w-2xl m-auto px-4 py-40 text-center relative">
@@ -114,7 +114,7 @@ export default function Home({ company, teams, footer }) {
 }
 
 export async function getServerSideProps(context) {
-  const company = await Axios.get(`${process.env.BASE_URL}/api/collections/company?_id=5f35e9fb259f49369e35cdbf`)
+  const company = await Axios.get(`${process.env.BASE_URL}/api/collections/company?_id=5f353d5ea48b5e4daea1593c`)
   const teams = await Axios.get(`${process.env.BASE_URL}/api/collections/team`)
   
   return {

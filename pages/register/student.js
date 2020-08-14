@@ -388,7 +388,8 @@ const RegisterStudent = ({ footer }) => {
       ...{ schedules: schedules },
       ...{ teacher: tutorPreference }
     }
-    const response = await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data)
+    data.schedules = data.schedules.map(sch => (`${sch.day} ${sch.hour}`))
+    await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data)
     setShowConfirmModal(true)
   }
 

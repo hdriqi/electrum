@@ -141,7 +141,7 @@ export default function Home({ data, footer }) {
           {
             data.why.map(data => {
               return (
-                <div className="w-1/2 lg:w-auto px-3 lg:px-12 mt-12 lg:mt-20">
+                <div className="w-1/2 lg:w-1/3 flex-shrink px-3 lg:px-12 mt-12 lg:mt-20">
                   <div>
                     <div className="relative">
                       <div className="absolute w-full" style={{

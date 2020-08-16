@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import ReactDropdown from 'react-dropdown'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
+import Head from 'next/head'
 
 // const pricing = [
 //   {
@@ -335,6 +336,20 @@ const Pricing = ({ pricing, footer }) => {
 
   return (
     <div>
+      <Head>
+        <title>Biaya | Rumah Belajar Electrum</title>
+        <meta name="description" content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+
+        <meta name='twitter:title' content="Biaya | Rumah Belajar Electrum" />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta name='twitter:image' content="/favicon.ico" />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content="Biaya | Rumah Belajar Electrum" />
+        <meta property='og:site_name' content="Rumah Belajar Electrum" />
+        <meta property='og:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta property='og:image' content="/favicon.ico" />
+      </Head>
       <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0 w-full bg-primary-green z-10"></div>
@@ -397,7 +412,7 @@ const Pricing = ({ pricing, footer }) => {
 
 export async function getServerSideProps(context) {
   const pricing = await Axios.get(`${process.env.BASE_URL}/api/collections/pricing`)
-  
+
   return {
     props: {
       pricing: pricing.data.data

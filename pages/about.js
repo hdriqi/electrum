@@ -2,43 +2,25 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import FooterCTA from '../components/FooterCTA'
 import Axios from 'axios'
-
-const about = {
-  intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ridiculus sed fermentum vulputate lacinia dictumst in dapibus. Duis turpis ac facilisis pellentesque porttitor a, amet. In cursus velit quisque vivamus placerat malesuada.',
-  vision: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ridiculus sed fermentum vulputate lacinia dictumst in dapibus. Duis turpis ac facilisis pellentesque porttitor a, amet. In cursus velit quisque vivamus placerat malesuada.',
-  mission: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ridiculus sed fermentum vulputate lacinia dictumst in dapibus. Duis turpis ac facilisis pellentesque porttitor a, amet. In cursus velit quisque vivamus placerat malesuada.',
-  teams: [
-    {
-      img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      name: 'Jane Doe',
-      position: 'Chief Executive Officer',
-      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    },
-    {
-      img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      name: 'Jane Doe',
-      position: 'Chief Executive Officer',
-      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    },
-    {
-      img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      name: 'Jane Doe',
-      position: 'Chief Executive Officer',
-      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    },
-    {
-      img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      name: 'Jane Doe',
-      position: 'Chief Executive Officer',
-      quotes: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    }
-  ]
-}
+import Head from 'next/head'
 
 export default function Home({ company, teams, footer }) {
-  console.log(company)
   return (
     <div>
+      <Head>
+        <title>Tentang Kami | Rumah Belajar Electrum</title>
+        <meta name="description" content={company.intro} />
+
+        <meta name='twitter:title' content="Tentang Kami | Rumah Belajar Electrum" />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:description' content={company.intro} />
+        <meta name='twitter:image' content={company.img} />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content="Tentang Kami | Rumah Belajar Electrum" />
+        <meta property='og:site_name' content="Rumah Belajar Electrum" />
+        <meta property='og:description' content={company.intro} />
+        <meta property='og:image' content={company.img} />
+      </Head>
       <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0">
@@ -116,7 +98,7 @@ export default function Home({ company, teams, footer }) {
 export async function getServerSideProps(context) {
   const company = await Axios.get(`${process.env.BASE_URL}/api/collections/company`)
   const teams = await Axios.get(`${process.env.BASE_URL}/api/collections/team`)
-  
+
   return {
     props: {
       company: company.data.data[0],

@@ -3,44 +3,7 @@ import Footer from '../components/Footer'
 import Link from 'next/link'
 import Axios from 'axios'
 import htmlToText from 'html-to-text'
-
-const posts = [
-  {
-    _id: 'asd',
-    title: 'Bagaimana cara melakukan pendaftaran?',
-    img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-    createdAt: new Date().getTime()
-  },
-  {
-    _id: 'asd',
-    title: 'Bagaimana cara melakukan pendaftaran?',
-    img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-    createdAt: new Date().getTime()
-  },
-  {
-    _id: 'asd',
-    title: 'Bagaimana cara melakukan pendaftaran?',
-    img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-    createdAt: new Date().getTime()
-  },
-  {
-    _id: 'asd',
-    title: 'Bagaimana cara melakukan pendaftaran?',
-    img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-    createdAt: new Date().getTime()
-  },
-  {
-    _id: 'asd',
-    title: 'Bagaimana cara melakukan pendaftaran?',
-    img: 'https://images.pexels.com/photos/4006576/pexels-photo-4006576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac quis auctor diam risus enim, fusce. Eros, cursus dignissim risus, risus pellentesque interdum placerat aliquet. Tellus eget sapien, in tempor sagittis. Id odio dictumst hac ut neque amet, adipiscing. Proin amet, nullam vulputate lectus tellus non ultricies vestibulum.',
-    createdAt: new Date().getTime()
-  }
-]
+import Head from 'next/head'
 
 const PostItem = ({ post }) => {
   return (
@@ -75,6 +38,20 @@ const PostItem = ({ post }) => {
 const Blog = ({ news, footer }) => {
   return (
     <div>
+      <Head>
+        <title>Berita dan Event | Rumah Belajar Electrum</title>
+        <meta name="description" content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+
+        <meta name='twitter:title' content="Berita dan Event | Rumah Belajar Electrum" />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta name='twitter:image' content="/favicon.ico" />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content="Berita dan Event | Rumah Belajar Electrum" />
+        <meta property='og:site_name' content="Rumah Belajar Electrum" />
+        <meta property='og:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta property='og:image' content="/favicon.ico" />
+      </Head>
       <Nav footer={footer} />
       <div className="relative">
         <div className="absolute inset-0 w-full bg-primary-green z-10"></div>
@@ -100,7 +77,7 @@ const Blog = ({ news, footer }) => {
 
 export async function getServerSideProps(context) {
   const news = await Axios.get(`${process.env.BASE_URL}/api/collections/news`)
-  
+
   return {
     props: {
       news: news.data.data

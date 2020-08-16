@@ -4,6 +4,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import FooterCTA from '../components/FooterCTA'
 import Axios from 'axios'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const data = {
   slides: [
@@ -88,9 +89,22 @@ const ResponsiveCarousel = ({ data, children }) => {
 }
 
 export default function Home({ data, footer }) {
-  console.log(data)
   return (
     <div>
+      <Head>
+        <title>Rumah Belajar Electrum</title>
+        <meta name="description" content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+
+        <meta name='twitter:title' content="Rumah Belajar Electrum" />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta name='twitter:image' content="/favicon.ico" />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content="Rumah Belajar Electrum" />
+        <meta property='og:site_name' content="Rumah Belajar Electrum" />
+        <meta property='og:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta property='og:image' content="/favicon.ico" />
+      </Head>
       <Nav footer={footer} />
       <div>
         <ResponsiveCarousel data={data}>

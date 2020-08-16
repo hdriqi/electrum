@@ -7,6 +7,7 @@ import InputSchedule from '../../components/InputSchedule'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Axios from 'axios'
+import Head from 'next/head'
 
 const default_subjects = [
   'Calistung',
@@ -257,6 +258,20 @@ const RegisterStudent = ({ pricing, footer }) => {
 
   return (
     <div className="bg-gray-100">
+      <Head>
+        <title>Pendaftaran Siswa | Rumah Belajar Electrum</title>
+        <meta name="description" content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+
+        <meta name='twitter:title' content="Pendaftaran Siswa | Rumah Belajar Electrum" />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta name='twitter:image' content="/favicon.ico" />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content="Pendaftaran Siswa | Rumah Belajar Electrum" />
+        <meta property='og:site_name' content="Rumah Belajar Electrum" />
+        <meta property='og:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
+        <meta property='og:image' content="/favicon.ico" />
+      </Head>
       {
         showConfirmModal && (
           <div className="fixed pt-24 px-4 inset-0" style={{

@@ -247,7 +247,7 @@ const RegisterStudent = ({ pricing, footer }) => {
     if (form.addressProvince && form.addressProvince.length > 0) {
       const newCity = province.find(p => p.province === form.addressProvince).city.map(c => c.city)
       setCityFilter(newCity)
-      
+
       if (form.addressCity && form.addressCity.length > 0) {
         const newDistrict = province.find(p => p.province === form.addressProvince)?.city.find(c => c.city === form.addressCity)?.district.map(d => capitalize(d.district)) || []
         setDistrictFilter(newDistrict)
@@ -525,7 +525,10 @@ const RegisterStudent = ({ pricing, footer }) => {
                   <div className="w-full lg:w-1/2 mt-8 px-3">
                     <h4 className="text-xl font-bold">Estimasi</h4>
                     <p className="mt-3">{priceEst.msg}</p>
-                    <h4 className="mt-3 text-4xl font-bold">{priceEst.price}</h4>
+                    <h4 className="mt-3 text-4xl font-bold">{Number(priceEst.price).toLocaleString('ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                    })}</h4>
                     <a href="/pricing" target="_blank" className="text-primary-green font-semibold block mt-4">Lihat rincian biaya lainnya</a>
                   </div>
                 )
@@ -551,7 +554,7 @@ const RegisterStudent = ({ pricing, footer }) => {
 
 export async function getServerSideProps(context) {
   const pricing = await Axios.get(`${process.env.BASE_URL}/api/collections/pricing`)
-  
+
   return {
     props: {
       pricing: pricing.data.data

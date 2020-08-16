@@ -304,7 +304,7 @@ const default_subjects = [
   'Biologi SMA',
 ]
 
-const RegisterStudent = ({ footer }) => {
+const RegisterStudent = ({ pricing, footer }) => {
   const router = useRouter()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [step, setStep] = useState(0)
@@ -367,7 +367,7 @@ const RegisterStudent = ({ footer }) => {
       const price = pricing.filter(price => {
         return (price.class.includes(priceClass) && price.session == form.package)
       })
-      const selectedPackage = price[0]
+      const selectedPackage = price && price[0]
       if (selectedPackage) {
         setPriceEst({
           msg: `Program Kelas ${form.class}, Jumlah ${nOfStud} Orang. Paket ${form.package} Sesi.`,
@@ -830,6 +830,16 @@ const RegisterStudent = ({ footer }) => {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const pricing = await Axios.get(`${process.env.BASE_URL}/api/collections/pricing`)
+  
+  return {
+    props: {
+      pricing: pricing.data.data
+    },
+  }
 }
 
 export default RegisterStudent  

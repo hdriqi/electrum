@@ -114,7 +114,7 @@ export default function Home({ company, teams, footer }) {
 }
 
 export async function getServerSideProps(context) {
-  const company = await Axios.get(`${process.env.BASE_URL}/api/collections/company?_id=5f353d5ea48b5e4daea1593c`)
+  const company = await Axios.get(`${process.env.BASE_URL}/api/collections/company`)
   const teams = await Axios.get(`${process.env.BASE_URL}/api/collections/team`)
   
   return {

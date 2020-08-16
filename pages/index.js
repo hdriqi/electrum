@@ -141,7 +141,7 @@ export default function Home({ data, footer }) {
           {
             data.why.map(data => {
               return (
-                <div className="w-1/2 lg:w-1/4 px-3 lg:px-12 mt-12 lg:mt-20">
+                <div className="w-1/2 lg:w-auto px-3 lg:px-12 mt-12 lg:mt-20">
                   <div>
                     <div className="relative">
                       <div className="absolute w-full" style={{
@@ -160,7 +160,7 @@ export default function Home({ data, footer }) {
                       </svg>
                     </div>
                     <h4 className="text-lg font-semibold mt-4">{data.title}</h4>
-                    <p className="mt-2">{data.desc}</p>
+                    <p className="mt-2">{data.description}</p>
                   </div>
                 </div>
               )

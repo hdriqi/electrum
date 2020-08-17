@@ -65,7 +65,6 @@ const default_area = [
 ]
 
 const RegisterTutor = ({ footer }) => {
-  const phoneNumber = `082134567890`
   const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
 
   const [form, setForm] = useState({
@@ -90,6 +89,7 @@ const RegisterTutor = ({ footer }) => {
   const [chosenSubject, setChosenSubject] = useState([])
   const [schedules, setSchedules] = useState([{}, {}])
   const [chosenAreas, setChosenArea] = useState([])
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const formValidation = () => {
     if (
@@ -129,6 +129,7 @@ const RegisterTutor = ({ footer }) => {
   }
 
   const _submit = async () => {
+    setIsSubmitting(true)
     const data = {
       ...form,
       ...{ schedules: schedules },
@@ -146,6 +147,7 @@ const RegisterTutor = ({ footer }) => {
     const attachment = fileUpload.data.url
     data.attachment = attachment
     const tutorPost = await Axios.post(`${process.env.BASE_URL}/api/collections/tutor`, data)
+    setIsSubmitting(false)
     setShowConfirmModal(true)
   }
 
@@ -250,7 +252,7 @@ const RegisterTutor = ({ footer }) => {
                   </svg>
                 </div>
                 <h3 className="mt-8 text-2xl text-center">Terima kasih telah mendaftar sebagai tutor pada Rumah Belajar Electrum.</h3>
-                <a className="block mt-8 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${msg}`}>
+                <a className="block mt-8 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${footer.phoneNumber}&text=${msg}`}>
                   <button className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
                     Hubungi Kami
                   </button>
@@ -434,7 +436,9 @@ const RegisterTutor = ({ footer }) => {
           </div>
         </div>
         <div className="flex mt-8">
-          <button disabled={!formValidation()} onClick={_ => _submit()} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
+          <button disabled={!(formValidation() && !isSubmitting)} onClick={_ => _submit()} className="text-lg bg-primary-green text-white px-4 py-2 rounded-md w-full">{
+            isSubmitting ? `Mengirim Pendaftaran...` : `Kirim Pendaftaran`
+          }</button>
         </div>
       </div >
       <div className="pt-16">

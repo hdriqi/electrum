@@ -48,6 +48,7 @@ const RegisterStudent = ({ pricing, footer }) => {
   const [additionalStudents, setAdditionalStudents] = useState([])
   const [tutorPreference, setTutorPreference] = useState([])
   const [schedules, setSchedules] = useState([{}, {}, {}])
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -99,6 +100,7 @@ const RegisterStudent = ({ pricing, footer }) => {
   }, [form, additionalStudents])
 
   const _submit = async () => {
+    setIsSubmitting(true)
     const data = {
       ...form,
       ...{ additionalStudents: additionalStudents },
@@ -108,6 +110,7 @@ const RegisterStudent = ({ pricing, footer }) => {
     }
     data.schedules = data.schedules.map(sch => (`${sch.day} ${sch.hour}`))
     await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data)
+    setIsSubmitting(false)
     setShowConfirmModal(true)
   }
 
@@ -554,7 +557,9 @@ const RegisterStudent = ({ pricing, footer }) => {
                 <button onClick={_ => setStep(0)} className="text-lg border px-4 py-2 rounded-md w-full">Periksa Kembali</button>
               </div>
               <div className="w-full lg:w-1/2 px-3 mt-4">
-                <button disabled={!step2FormValidation()} onClick={_submit} className="text-lg text-white bg-primary-green px-4 py-2 rounded-md w-full">Kirim Pendaftaran</button>
+                <button disabled={!(step2FormValidation() && !isSubmitting)} onClick={_submit} className="text-lg text-white bg-primary-green px-4 py-2 rounded-md w-full">{
+                  isSubmitting ? `Mengirim Pendaftaran...` : `Kirim Pendaftaran`
+                }</button>
               </div>
             </div>
           </div>

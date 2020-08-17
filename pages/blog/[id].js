@@ -27,7 +27,7 @@ const Post = ({ post, metaDesc, footer }) => {
         maxHeight: `20rem`
       }}>
         <div className="absolute top-0 w-full h-full z-10" style={{
-          backgroundImage: `url(${post.img})`,
+          backgroundImage: `url("${post.img}")`,
           backgroundSize: `cover`,
           backgroundPosition: `center`
         }}></div>

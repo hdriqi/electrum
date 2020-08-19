@@ -9,7 +9,9 @@ function MyApp({ Component, pageProps, footer }) {
 }
 
 MyApp.getInitialProps = async (appContext) => {
+  Axios.defaults.headers.common['x-api-key'] = process.env.CLIENT_READ_KEY;
   const appProps = await App.getInitialProps(appContext);
+
   const info = await Axios.get(`${process.env.BASE_URL}/api/collections/info`)
 
   return { ...appProps, footer: info.data.data[0] }

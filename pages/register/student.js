@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Axios from 'axios'
 import Head from 'next/head'
+import { processEnv } from 'next/dist/lib/load-env-config'
 
 const default_subjects = [
   'Calistung',
@@ -109,7 +110,11 @@ const RegisterStudent = ({ pricing, footer }) => {
       ...{ teacher: tutorPreference }
     }
     data.schedules = data.schedules.map(sch => (`${sch.day} ${sch.hour}`))
-    await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data)
+    await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data, {
+      headers: {
+        'x-api-key': processEnv.env.CLIENT_WRITE_KEY
+      }
+    })
     setIsSubmitting(false)
     setShowConfirmModal(true)
   }

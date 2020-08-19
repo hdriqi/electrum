@@ -98,12 +98,12 @@ export default function Home({ data, footer }) {
         <meta name='twitter:title' content="Rumah Belajar Electrum" />
         <meta name='twitter:card' content='summary' />
         <meta name='twitter:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
-        <meta name='twitter:image' content="/favicon.ico" />
+        <meta name='twitter:image' content={data.slides[0].img} />
         <meta property='og:type' content='website' />
         <meta property='og:title' content="Rumah Belajar Electrum" />
         <meta property='og:site_name' content="Rumah Belajar Electrum" />
         <meta property='og:description' content="Yuk belajar di Electrum, banyak tutor tutor ramah dan berpengalaman dari perguruan tinggi pilihan yang akan memandu kamu belajar dari konsep dasar sampai menguasai materi. Pilih waktu belajar yang paling kamu suka dan ajak teman-temanmu belajar bareng. Hasil belajarmu selama di electrum bisa kamu lihat lho udah sampe mana tahap penguasaan materimu. Tutor-tutor kami akan memastikan kamu paham sama materi yang kamu pelajari!" />
-        <meta property='og:image' content="/favicon.ico" />
+        <meta property='og:image' content={data.slides[0].img} />
       </Head>
       <Nav footer={footer} />
       <div>

@@ -4,6 +4,7 @@ import ReactDropdown from 'react-dropdown'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 import Head from 'next/head'
+import FooterCTA from '../components/FooterCTA'
 
 // const pricing = [
 //   {
@@ -403,6 +404,16 @@ const Pricing = ({ pricing, footer }) => {
               })
             }
           </table>
+        </div>
+        <div className="px-4 mt-12">
+          <p className="font-bold">Catatan:</p>
+          <p className="mt-2">Diskon 20% untuk pilihan pembelajaran online</p>
+        </div>
+      </div>
+      <div className="bg-primary-navy">
+        <div className="max-w-6xl m-auto px-4 py-16">
+          <h4 className="text-3xl font-bold text-white">Pendaftaran Siswa</h4>
+          <FooterCTA />
         </div>
       </div>
       <Footer footer={footer} />

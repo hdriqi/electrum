@@ -405,10 +405,14 @@ const Pricing = ({ pricing, footer }) => {
             }
           </table>
         </div>
-        <div className="px-4 mt-12">
-          <p className="font-bold">Catatan:</p>
-          <p className="mt-2">Diskon 20% untuk pilihan pembelajaran online</p>
-        </div>
+        {
+          footer.pricingNotes && (
+            <div className="px-4 mt-12">
+              <p className="font-bold">Catatan:</p>
+              <p className="mt-2 whitespace-pre-line">{footer.pricingNotes}</p>
+            </div>
+          )
+        }
       </div>
       <div className="bg-primary-navy">
         <div className="max-w-6xl m-auto px-4 py-16">

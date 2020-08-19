@@ -328,7 +328,7 @@ const RegisterStudent = ({ pricing, footer }) => {
       </div>
       {
         step === 0 && (
-          <div className="max-w-3xl m-auto bg-white rounded-md py-16 px-4">
+          <div className="max-w-3xl m-auto bg-primary-navy text-white rounded-md py-16 px-4">
             <div className="border-b border-gray-300 pb-2">
               <h4 className="text-2xl font-bold">Data Diri</h4>
             </div>
@@ -360,7 +360,7 @@ const RegisterStudent = ({ pricing, footer }) => {
             }
             {
               additionalStudents.length < 6 && (
-                <button onClick={_ => addAdditionalStudents()} className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
+                <button onClick={_ => addAdditionalStudents()} className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white font-semibold px-3 py-2">
                   + Tambahkan Siswa (Maksimal 7 Siswa)
                 </button>
               )
@@ -446,7 +446,7 @@ const RegisterStudent = ({ pricing, footer }) => {
       }
       {
         step === 1 && (
-          <div className="max-w-3xl m-auto bg-white rounded-md py-16 px-4">
+          <div className="max-w-3xl m-auto bg-primary-navy text-white rounded-md py-16 px-4">
             <div className="border-b border-gray-300 pb-2">
               <h4 className="text-2xl font-bold">Data Program</h4>
             </div>
@@ -497,7 +497,7 @@ const RegisterStudent = ({ pricing, footer }) => {
               </div>
               {
                 schedules.length < 8 && (
-                  <button onClick={_ => addSchedule()} className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
+                  <button onClick={_ => addSchedule()} className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white font-semibold px-3 py-2">
                     + Tambahkan Jadwal (Maks. 8)
                   </button>
                 )

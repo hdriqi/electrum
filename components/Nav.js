@@ -118,7 +118,7 @@ const Nav = ({ footer }) => {
                   </svg>
                   <h4 className="text-primary-green pl-2 text-2xl font-semibold">{footer.phoneNumber}</h4>
                 </div>
-                <p className="pt-2">Jam Kerja 09.00 - 17.00 WIB</p>
+                <p className="pt-2">{footer.officeHours}</p>
               </div>
             </div>
           </div>

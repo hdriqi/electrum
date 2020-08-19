@@ -26,15 +26,17 @@ export default function Home({ company, teams, footer }) {
         <div className="absolute inset-0">
           <img className="object-cover w-full h-full" src={company.img} />
         </div>
-        <div className="absolute inset-0 bg-primary-green opacity-75"></div>
+        <div className="absolute inset-0 bg-primary-green" style={{
+          opacity: 0.9
+        }}></div>
         <div className="max-w-2xl m-auto px-4 py-40 text-center relative">
-          <h3 className="text-3xl text-white font-bold">Halo! Selamat Datang di Bimbel Electrum</h3>
-          <p className="text-white mt-4 whitespace-pre-line">{company.intro}</p>
+          <h3 className="text-3xl text-black font-bold">Halo! Selamat Datang di Bimbel Electrum</h3>
+          <p className="text-black mt-4 whitespace-pre-line">{company.intro}</p>
         </div>
         <div className="absolute w-full bottom-0">
           <div className="pb-8">
             <svg className="m-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.2498 15.8789L12.7499 20.3787V0.820435H11.2499V20.3787L6.75009 15.8789L5.68945 16.9395L12 23.25L18.3105 16.9395L17.2498 15.8789Z" fill="white" />
+              <path d="M17.2498 15.8789L12.7499 20.3787V0.820435H11.2499V20.3787L6.75009 15.8789L5.68945 16.9395L12 23.25L18.3105 16.9395L17.2498 15.8789Z" fill="black" />
             </svg>
           </div>
         </div>

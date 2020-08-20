@@ -1,68 +1,32 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, CarouselContext } from 'pure-react-carousel'
 import FooterCTA from '../components/FooterCTA'
 import Axios from 'axios'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useState, useContext, useEffect } from 'react'
 
-const data = {
-  slides: [
-    {
-      img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
-      url: `/blog/123`
-    },
-    {
-      img: `https://evius-dev.s3-ap-southeast-1.amazonaws.com/slide.png`,
-      url: `/blog/123`
+const MethodText = ({ methods }) => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const carouselContext = useContext(CarouselContext)
+
+  useEffect(() => {
+    function onChange() {
+      setCurrentSlide(carouselContext.state.currentSlide)
     }
-  ],
-  why: [
-    {
-      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-      title: 'Laporan Progress',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    },
-    {
-      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-      title: 'Laporan Progress',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    },
-    {
-      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-      title: 'Laporan Progress',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    },
-    {
-      icon: 'https://evius-dev.s3-ap-southeast-1.amazonaws.com/why-us-electrum-icon.svg',
-      title: 'Laporan Progress',
-      desc: 'Perkembanganmu akan kami catat oleh tutor agar kamu bisa mengetahui strategi belajar yang terbaik untukmu!'
-    }
-  ],
-  methods: [
-    {
-      name: 'Metode 1',
-      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-      desc: `Electrum menawarkan program kemitraan dengan insentif menarik dan kompetitif untuk para pengajar bertalenta untuk membagikan ilmu dan pengalaman kepada murid-murid kami yang ingin mewujudkan potensi-potensi mereka untuk menguasai materi dan konsep secara mendalam dari mata pelajaran.`
-    },
-    {
-      name: 'Metode 2',
-      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-      desc: `Lorem ipsum dolor amet`
-    }
-  ],
-  testimonials: [
-    {
-      name: 'John Doe',
-      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-      message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mattis justo.`
-    },
-    {
-      name: 'Bambang Suparno',
-      img: `https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?cs=srgb&dl=pexels-giftpunditscom-1326947.jpg&fm=jpg`,
-      message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mattis justo.`
-    }
-  ]
+    carouselContext.subscribe(onChange)
+    return () => carouselContext.unsubscribe(onChange)
+  }, [carouselContext])
+
+  return (
+    <div>
+      <div className="px-4">
+        <p className="text-xl font-semibold text-white">{methods[currentSlide].name}</p>
+        <p className="mt-2 text-white">{methods[currentSlide].description}</p>
+      </div>
+    </div>
+  )
 }
 
 const ResponsiveCarousel = ({ data, children }) => {
@@ -182,8 +146,7 @@ export default function Home({ data, footer }) {
           }
         </div>
       </div>
-      <div className="bg-primary-navy overflow-hidden relative">
-        {/* <div className="hidden lg:block absolute h-full w-1/3 z-10 bg-primary-navy"></div> */}
+      <div className="bg-primary-navy overflow-hidden relative py-8">
         <div className="max-w-xl m-auto">
           <CarouselProvider
             naturalSlideWidth={100}
@@ -192,7 +155,7 @@ export default function Home({ data, footer }) {
             className="carousel-peek"
           >
             <div className="flex flex-wrap relative">
-              <div className="w-full relative z-10 px-4 pt-8 bg-primary-navy flex flex-col items-center">
+              <div className="w-full relative z-10 px-4 bg-primary-navy flex flex-col items-center">
                 <h4 className="text-3xl text-white font-bold">Program Electrum</h4>
                 <div className="flex pt-8">
                   <ButtonBack>
@@ -220,11 +183,14 @@ export default function Home({ data, footer }) {
                               paddingBottom: `75%`
                             }}>
                               <img className="absolute w-full h-full object-cover rounded-md overflow-hidden" src={method.img} />
-                              <div className="absolute inset-0 p-4 rounded-md" style={{
+                              <div className="hidden md:block absolute inset-0 p-4 rounded-md" style={{
                                 background: `linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 59.75%)`
                               }}>
                                 <div className="flex items-end h-full">
-                                  <p className="text-white">{method.description}</p>
+                                  <div>
+                                    <p className="text-xl font-semibold text-white">{method.name}</p>
+                                    <p className="mt-2 text-white">{method.description}</p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -234,6 +200,9 @@ export default function Home({ data, footer }) {
                     })
                   }
                 </Slider>
+                <div className="block md:hidden">
+                  <MethodText methods={data.methods} />
+                </div>
               </div>
             </div>
           </CarouselProvider>

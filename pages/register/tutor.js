@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Footer from '../../components/Footer'
 import InputSchedule from '../../components/InputSchedule'
 import ReactDropdown from 'react-dropdown'
-import { province, city, capitalize } from '../../utils/common'
+import { province, capitalize } from '../../utils/common'
 import Link from 'next/link'
 import Axios from 'axios'
 import Head from 'next/head'
@@ -90,6 +90,21 @@ const RegisterTutor = ({ footer }) => {
   const [schedules, setSchedules] = useState([{}, {}])
   const [chosenAreas, setChosenArea] = useState([])
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formAreas, setFormAreas] = useState([])
+
+  useEffect(() => {
+    const _areas = []
+    province.forEach(prov => {
+      prov.city.forEach(city => {
+        const data = {
+          title: city.city,
+          desc: city.district.map(district => capitalize(district.district)).join(', ')
+        }
+        _areas.push(data)
+      })
+    })
+    setFormAreas(_areas)
+  }, [])
 
   const formValidation = () => {
     if (
@@ -142,11 +157,16 @@ const RegisterTutor = ({ footer }) => {
     const fileUpload = await Axios.post(`${process.env.BASE_URL}/api/upload`, mediaFile, {
       headers: {
         "Content-Type": "multipart/form-data",
+        'x-api-key': process.env.CLIENT_WRITE_KEY
       },
     })
     const attachment = fileUpload.data.url
     data.attachment = attachment
-    const tutorPost = await Axios.post(`${process.env.BASE_URL}/api/collections/tutor`, data)
+    const tutorPost = await Axios.post(`${process.env.BASE_URL}/api/collections/tutor`, data, {
+      headers: {
+        'x-api-key': process.env.CLIENT_WRITE_KEY
+      }
+    })
     setIsSubmitting(false)
     setShowConfirmModal(true)
   }
@@ -339,11 +359,25 @@ const RegisterTutor = ({ footer }) => {
         <div className="flex flex-wrap -mx-3">
           <div className="w-full lg:w-1/2 mt-2 px-3">
             <label className="block">Tahun Lulus</label>
-            <input type="text" value={form.eduGradYear} onInput={e => updateForm('eduGradYear', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
+            <ReactDropdown value={form.eduGradYear} onChange={opt => updateForm('eduGradYear', opt.value)} options={[
+              'Belum Lulus',
+              '2020',
+              '2019',
+              '2018',
+              '2017',
+              '2016',
+              '2015',
+              '2014',
+              '2013',
+              '2012',
+              '2011',
+              '2010',
+              '<2010'
+            ]} placeholder="Pilih Tahun Lulus" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
           </div>
           <div className="w-full lg:w-1/2 mt-2 px-3">
             <label className="block">IPK</label>
-            <input type="text" value={form.eduGPA} onInput={e => updateForm('eduGPA', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
+            <input placeholder="Contoh: 3.50 (2 angka dibelakang koma)" type="number" value={form.eduGPA} onInput={e => updateForm('eduGPA', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
           </div>
         </div>
         <div className="mt-3">
@@ -422,12 +456,16 @@ const RegisterTutor = ({ footer }) => {
           <p className="mt-2">Bisa memilih lebih dari satu</p>
           <div className="flex flex-wrap -mx-3">
             {
-              default_area.map((data, idx) => {
+              formAreas.map((data, idx) => {
                 return (
-                  <div className="cursor-pointer w-full lg:w-1/2 mt-2 px-3" key={idx}>
-                    <div onClick={_ => toggleChosenArea(data.title)} className={`transition duration-150 ease-in-out h-40 border rounded-md p-4 ${chosenAreas.findIndex(area => area === data.title) > -1 ? 'bg-green-200' : 'bg-gray-200 '}`}>
+                  <div className="cursor-pointer w-full lg:w-1/2 mt-2 px-3 text-black" key={idx}>
+                    <div style={{
+                      minHeight: `14rem`
+                    }} onClick={_ => toggleChosenArea(data.title)} className={`transition duration-150 ease-in-out border rounded-md p-4 ${chosenAreas.findIndex(area => area === data.title) > -1 ? 'bg-green-200' : 'bg-gray-200 '}`}>
                       <h4 className="text-lg font-semibold">{data.title}</h4>
-                      <p className="text-sm mt-2">{data.desc}</p>
+                      <p className="mt-2" style={{
+                        fontSize: `12px`
+                      }}>{data.desc}</p>
                     </div>
                   </div>
                 )

@@ -26,7 +26,7 @@ const default_subjects = [
 const RegisterStudent = ({ pricing, footer }) => {
   const router = useRouter()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(1)
   const [form, setForm] = useState({
     fullname: router.query.fullname || '',
     class: router.query.class || '',
@@ -112,7 +112,7 @@ const RegisterStudent = ({ pricing, footer }) => {
     data.schedules = data.schedules.map(sch => (`${sch.day} ${sch.hour}`))
     await Axios.post(`${process.env.BASE_URL}/api/collections/student`, data, {
       headers: {
-        'x-api-key': processEnv.env.CLIENT_WRITE_KEY
+        'x-api-key': process.env.CLIENT_WRITE_KEY
       }
     })
     setIsSubmitting(false)
@@ -472,7 +472,7 @@ const RegisterStudent = ({ pricing, footer }) => {
             </div>
             <div className="mt-8">
               <h4 className="text-xl font-bold">Jadwal Belajar</h4>
-              <p className="mt-3">Harus memilih <b>minimal 3 waktu</b> yang diinginkan</p>
+              <p className="mt-3">Harus memilih <b>minimal 3 waktu</b> yang diinginkan (agar dapat disesuaikan dengan jadwal tutor yang tersedia)</p>
               <div className="mt-3">
                 {
                   schedules.map((sch, idx) => {

@@ -409,7 +409,9 @@ const Pricing = ({ pricing, footer }) => {
           footer.pricingNotes && (
             <div className="px-4 mt-12">
               <p className="font-bold">Catatan:</p>
-              <p className="mt-2 whitespace-pre-line">{footer.pricingNotes}</p>
+              <div className="mt-2" dangerouslySetInnerHTML={{
+                __html: footer.pricingNotes
+              }}></div>
             </div>
           )
         }

@@ -294,6 +294,7 @@ const RegisterStudent = ({ pricing, footer }) => {
                   </svg>
                 </div>
                 <h3 className="mt-8 text-2xl text-center">Terima kasih telah melakukan pendaftaran pada Rumah Belajar Electrum.</h3>
+                <p className="mt-2 text-xl text-center">Kami akan segera menghubungi nomor dan email orang tua yang sudah kamu daftarkan</p>
                 <a className="block mt-8 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${footer.phoneNumber}&text=${msg}`}>
                   <button className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
                     Hubungi Kami

@@ -241,8 +241,7 @@ const RegisterStudent = ({ pricing, footer }) => {
     setSchedules(cloneSchedules)
   }
 
-  const phoneNumber = `082134567890`
-  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
+  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Electrum`)
 
   const [provinceFilter, setProvinceFilter] = useState([])
   const [cityFilter, setCityFilter] = useState([])
@@ -295,7 +294,7 @@ const RegisterStudent = ({ pricing, footer }) => {
                   </svg>
                 </div>
                 <h3 className="mt-8 text-2xl text-center">Terima kasih telah melakukan pendaftaran pada Rumah Belajar Electrum.</h3>
-                <a className="block mt-8 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${msg}`}>
+                <a className="block mt-8 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${footer.phoneNumber}&text=${msg}`}>
                   <button className="rounded-md overflow-hidden cursor-pointer mt-4 bg-primary-green text-white px-3 py-2">
                     Hubungi Kami
                   </button>

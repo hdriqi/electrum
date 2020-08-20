@@ -65,7 +65,7 @@ const default_area = [
 ]
 
 const RegisterTutor = ({ footer }) => {
-  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
+  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Electrum`)
 
   const [form, setForm] = useState({
     fullname: '',

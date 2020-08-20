@@ -40,8 +40,7 @@ const FAQItem = ({ faq }) => {
 }
 
 const FAQ = ({ faqs, footer }) => {
-  const phoneNumber = `082134567890`
-  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Elektrum`)
+  const msg = encodeURI(`Saya ingin tanya mengenai bimbel Electrum`)
 
   return (
     <div>
@@ -78,7 +77,7 @@ const FAQ = ({ faqs, footer }) => {
       <div className="bg-primary-navy py-16">
         <div className="max-w-6xl m-auto text-center">
           <h2 className="text-3xl text-white font-bold">Masih bingung atau ada pertanyaan lain?</h2>
-          <a className="block mt-12 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${msg}`}>
+          <a className="block mt-12 px-4" target="_blank" href={`https://api.whatsapp.com/send?phone=${footer.phoneNumber}&text=${msg}`}>
             <button className="bg-primary-green font-semibold text-lg text-black px-4 py-4 rounded-md w-full max-w-sm">Hubungi via WhatsApp</button>
           </a>
         </div>

@@ -107,6 +107,8 @@ const RegisterTutor = ({ footer }) => {
   }, [])
 
   const formValidation = () => {
+    const gpaRegex = /^([0-4]\.\d\d)$/
+
     if (
       form.fullname.length > 0 &&
       form.dateOfBirth.length > 0 &&
@@ -120,6 +122,7 @@ const RegisterTutor = ({ footer }) => {
       form.eduMajor.length > 0 &&
       form.eduGradYear.length > 0 &&
       form.eduGPA.length > 0 &&
+      gpaRegex.test(form.eduGPA) &&
       form.attachment &&
       chosenSubject.length > 0 &&
       schedules.length > 1 &&

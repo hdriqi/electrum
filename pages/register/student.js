@@ -2,13 +2,12 @@ import Nav from '../../components/Nav'
 import { useState, useEffect } from 'react'
 import Footer from '../../components/Footer'
 import ReactDropdown from 'react-dropdown'
-import { province, city, capitalize } from '../../utils/common'
+import { province, capitalize } from '../../utils/common'
 import InputSchedule from '../../components/InputSchedule'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Axios from 'axios'
 import Head from 'next/head'
-import { processEnv } from 'next/dist/lib/load-env-config'
 
 const default_subjects = [
   'Calistung',
@@ -26,7 +25,7 @@ const default_subjects = [
 const RegisterStudent = ({ pricing, footer }) => {
   const router = useRouter()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
   const [form, setForm] = useState({
     fullname: router.query.fullname || '',
     class: router.query.class || '',
@@ -50,6 +49,7 @@ const RegisterStudent = ({ pricing, footer }) => {
   const [tutorPreference, setTutorPreference] = useState([])
   const [schedules, setSchedules] = useState([{}, {}, {}])
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [termCondition, setTermCondition] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -144,7 +144,8 @@ const RegisterStudent = ({ pricing, footer }) => {
       schedules.length > 2 &&
       schedules.every(schedule => schedule.day && schedule.hour) &&
       tutorPreference.length > 0 &&
-      form.package && form.package.toString().length > 0
+      form.package && form.package.toString().length > 0 &&
+      termCondition 
     ) {
       return true
     }
@@ -556,6 +557,19 @@ const RegisterStudent = ({ pricing, footer }) => {
                   </div>
                 )
               }
+            </div>
+            <div className="mt-8">
+              <div>
+                <div className="flex items-center">
+                  <div>
+                    <input checked={termCondition} onChange={_ => setTermCondition(!termCondition)} type="checkbox" />
+                  </div>
+                  <div className="pl-2">
+                    <p>Saya menyetujui Syarat & Ketentuan yang berlaku di Rumah Belajar Electrum.</p>
+                    <p>Syarat dan ketentuan dapat diunduh <a target="_blank" href={footer.termsAndConditionsFile} className="underline cursor-pointer font-bold">disini</a></p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="flex flex-wrap mt-6 -mx-3">
               <div className="w-full lg:w-1/2 px-3 mt-4">

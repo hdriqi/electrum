@@ -8,6 +8,8 @@ import Link from 'next/link'
 import Axios from 'axios'
 import Head from 'next/head'
 
+const gpaRegex = /^([0-4]\.\d\d)$/
+
 const default_subjects = [
   'Calistung',
   'Matematika SD',
@@ -19,49 +21,6 @@ const default_subjects = [
   'Fisika SMA',
   'Kimia SMA',
   'Biologi SMA',
-]
-
-const default_area = [
-  {
-    title: `Jakarta Utara`,
-    desc: `Cilincing, Kelapa Gading, Koja, Pademangan, Penjaringan, Tanjung Priuk`
-  },
-  {
-    title: `Jakarta Selatan`,
-    desc: `Cilandak, Jagakarsa, Kebayoran baru, Kebayoran Lama, Mampang Prapatan, Pancoran, Pasar Minggu, Pesanggrahan, Setiabudi, Tebet`
-  },
-  {
-    title: `Jakarta Barat`,
-    desc: `Cengkareng, Grogol Petamburan, Taman Sari, Tambora, Kebon Jeruk, Kalideres, Palmerah, Kembangan`
-  },
-  {
-    title: `Jakarta Pusat`,
-    desc: `Cempaka Putih, Gambir, Johar Baru, Kemayoran, Menteng, Sawah Besar, Senen, Tanah Abang`
-  },
-  {
-    title: `Jakarta Timur`,
-    desc: `Cakung, Cipayung, Ciracas, Duren Sawit, Kramat Jati, Makasar, Matraman, Pasar Rebo, Pulo Gadung`
-  },
-  {
-    title: `Depok`,
-    desc: `Beji, Bojongsari, Cilodong, CImanggis, Cinere, Cipayung Limo, Pancoran Mas, Sawangan, Sukmajaya, Tapos`
-  },
-  {
-    title: `Bekasi`,
-    desc: `Bantargebang, Bekasi Utara, Selatan, Barat, TImur, Jati Asih, Jatisampurna, Medan Satria, Mustika Jaya, Pondok Gede, Pondok Melati, Rawalumbu`
-  },
-  {
-    title: `Bogor`,
-    desc: `Bogor Barat, Selatan, Tengah, Utara, Timur, Tanah Sereal`
-  },
-  {
-    title: `Tangerang Selatan`,
-    desc: `Ciputat, Ciputat Timur, Pamulang, Pondok Aren, Serpong, Serpong Utara, Setu`
-  },
-  {
-    title: `Tangerang`,
-    desc: `Batu Ceper, Benda, Cibodas, Ciledug, Cipondoh, Jatiuwung, Karangtengah, Karawaci, Larangan, Neglasari, Periuk, Pinang, Tangerang`
-  }
 ]
 
 const RegisterTutor = ({ footer }) => {
@@ -107,8 +66,6 @@ const RegisterTutor = ({ footer }) => {
   }, [])
 
   const formValidation = () => {
-    const gpaRegex = /^([0-4]\.\d\d)$/
-
     if (
       form.fullname.length > 0 &&
       form.dateOfBirth.length > 0 &&
@@ -136,6 +93,36 @@ const RegisterTutor = ({ footer }) => {
   const updateForm = (key, value) => {
     const clone = { ...form }
     clone[key] = value
+    const prevValue = form[key]
+    if (key === 'eduGPA') {
+      if (value.length === 0) {
+        clone[key] = ''
+      }
+      else if (value.length === 1) {
+        const regex = /^([0-4])$/
+        if (!regex.test(value)) {
+          clone[key] = prevValue
+        }
+      }
+      else if (value.length === 2) {
+        const regex = /^([0-4]\.)$/
+        if (!regex.test(value)) {
+          clone[key] = prevValue
+        }
+      }
+      else if (value.length === 3) {
+        const regex = /^([0-4]\.\d)$/
+        if (!regex.test(value)) {
+          clone[key] = prevValue
+        }
+      }
+      else {
+        const regex = /^([0-4]\.\d\d)$/
+        if (!regex.test(value)) {
+          clone[key] = prevValue
+        }
+      }
+    }
     if (key === 'addressProvince') {
       clone.addressCity = ''
       clone.addressDistrict = ''
@@ -380,7 +367,11 @@ const RegisterTutor = ({ footer }) => {
           </div>
           <div className="w-full lg:w-1/2 mt-2 px-3">
             <label className="block">IPK</label>
-            <input placeholder="Contoh: 3.50 (2 angka dibelakang koma)" type="number" value={form.eduGPA} onInput={e => updateForm('eduGPA', e.target.value)} className="w-full mt-2 bg-gray-200 px-3" />
+            <input placeholder="Contoh: 3.50 (2 angka dibelakang koma)" type="number" value={form.eduGPA} onInput={e => updateForm('eduGPA', e.target.value)} onKeyDown={(e) => {
+              if (e.key === 'e' || e.key === '-') {
+                e.preventDefault()
+              }
+            }} className="w-full mt-2 bg-gray-200 px-3" />
           </div>
         </div>
         <div className="mt-3">

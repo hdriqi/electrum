@@ -22,10 +22,6 @@ input {
   @apply text-black;
 }
 
-p {
-  @apply text-gray-800;
-}
-
 .about-profile {
   @apply border-t;
 }

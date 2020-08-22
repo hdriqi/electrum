@@ -46,11 +46,11 @@ export default function Home({ company, teams, footer }) {
           <div className="flex flex-wrap -mx-3">
             <div className="w-full lg:w-1/2 px-3 pt-8 lg:pt-0">
               <h3 className="text-3xl font-bold">Visi</h3>
-              <p className="mt-4">{company.vision}</p>
+              <p className="mt-4 whitespace-pre-line">{company.vision}</p>
             </div>
             <div className="w-full lg:w-1/2 px-3 pt-8 lg:pt-0">
               <h3 className="text-3xl font-bold">Misi</h3>
-              <p className="mt-4">{company.mission}</p>
+              <p className="mt-4 whitespace-pre-line">{company.mission}</p>
             </div>
           </div>
         </div>

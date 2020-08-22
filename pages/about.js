@@ -58,25 +58,27 @@ export default function Home({ company, teams, footer }) {
       <div className="bg-white">
         <div className="max-w-6xl m-auto px-4 py-16">
           <h3 className="text-3xl font-bold text-center">Tim Kami</h3>
-          <div className="flex flex-wrap mt-8 -mx-3">
+          <div className="flex flex-wrap -mx-3">
             {
               teams.map((team, idx) => {
                 return (
-                  <div className="w-full lg:w-1/3 px-3 pt-8" key={idx}>
-                    <div className="flex flex-col items-center -mx-3">
-                      <div className="px-3 w-full">
-                        <div className="w-full relative overflow-hidden" style={{
-                          paddingBottom: `100%`
-                        }}>
-                          <img className="absolute inset-0 object-cover" src={team.img} />
+                  <div className={`w-full px-3 pt-8`} key={idx}>
+                    <div className={`${idx === 0 ? '' : 'border-t'}`}>
+                      <div className={`pt-8 flex flex-col lg:flex-row items-center lg:items-start -mx-3 ${idx === 0 ? '' : 'border-t'}`}>
+                        <div className="px-3 w-full lg:w-1/3">
+                          <div className="relative overflow-hidden w-full" style={{
+                            paddingBottom: `100%`
+                          }}>
+                            <img className="absolute inset-0 object-cover" src={team.img} />
+                          </div>
                         </div>
-                      </div>
-                      <div className="px-3">
-                        <h4 className="text-lg font-semibold mt-2">{team.name}</h4>
-                        <h4 className="text-sm font-semibold mt-2">{team.position}</h4>
-                        <div className="mt-4" dangerouslySetInnerHTML={{
-                          __html: team.quotes
-                        }}></div>
+                        <div className="px-3 w-full lg:w-2/3">
+                          <h4 className="text-sm text-primary-green font-semibold mt-2 lg:mt-0">{team.position}</h4>
+                          <h4 className="text-2xl font-semibold mt-1">{team.name}</h4>
+                          <div className="mt-4" dangerouslySetInnerHTML={{
+                            __html: team.quotes
+                          }}></div>
+                        </div>
                       </div>
                     </div>
                   </div>

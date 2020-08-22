@@ -56,7 +56,7 @@ export default function Home({ company, teams, footer }) {
         </div>
       </div>
       <div className="bg-white">
-        <div className="max-w-6xl m-auto px-4 py-16">
+        <div className="max-w-4xl m-auto px-4 py-16">
           <h3 className="text-3xl font-bold text-center">Tim Kami</h3>
           <div className="flex flex-wrap -mx-3">
             {
@@ -75,7 +75,7 @@ export default function Home({ company, teams, footer }) {
                         <div className="px-3 w-full lg:w-2/3">
                           <h4 className="text-sm text-primary-green font-semibold mt-2 lg:mt-0">{team.position}</h4>
                           <h4 className="text-2xl font-semibold mt-1">{team.name}</h4>
-                          <div className="mt-4" dangerouslySetInnerHTML={{
+                          <div className="text-sm mt-4" dangerouslySetInnerHTML={{
                             __html: team.quotes
                           }}></div>
                         </div>

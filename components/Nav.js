@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 const Nav = ({ footer }) => {
   const router = useRouter()
   const [showMobileNav, setShowMobileNav] = useState(false)
+  const [showNavClass, setShowNavClass] = useState(false)
 
   useEffect(() => {
     setShowMobileNav(false)
@@ -29,35 +30,42 @@ const Nav = ({ footer }) => {
             </Link>
             <div className="hidden lg:block">
               <div className="flex items-center pl-8">
-                <div className="px-4">
+                <div className="pr-4">
+                  <Link href="/register/online">
+                    <a>
+                      <h4 className="text-sm">Kelas Online</h4>
+                    </a>
+                  </Link>
+                </div>
+                <div className="pr-4">
                   <Link href="/about">
                     <a>
                       <h4 className="text-sm">Tentang Kami</h4>
                     </a>
                   </Link>
                 </div>
-                <div className="px-4">
+                <div className="pr-4">
                   <Link href="/pricing">
                     <a>
                       <h4 className="text-sm">Biaya</h4>
                     </a>
                   </Link>
                 </div>
-                <div className="px-4">
+                <div className="pr-4">
                   <Link href="/register/tutor">
                     <a>
                       <h4 className="text-sm">Menjadi Tutor</h4>
                     </a>
                   </Link>
                 </div>
-                <div className="px-4">
+                <div className="pr-4">
                   <Link href="/faq">
                     <a>
                       <h4 className="text-sm">FAQ</h4>
                     </a>
                   </Link>
                 </div>
-                <div className="px-4">
+                <div className="pr-4">
                   <Link href="/blog">
                     <a>
                       <h4 className="text-sm">Berita & Event</h4>
@@ -116,7 +124,7 @@ const Nav = ({ footer }) => {
           <div className="fixed bg-white inset-0 z-40 py-24 overflow-y-auto">
             <div className="flex items-center justify-center">
               <div className="text-center">
-                <div className="px-4">
+                <div className="pr-4">
                   <Link href="/">
                     <a>
                       <h4 className="text-2xl font-semibold">Home</h4>
@@ -124,12 +132,30 @@ const Nav = ({ footer }) => {
                   </Link>
                 </div>
                 <div className="px-4 pt-6">
-                  <Link href="/register/student">
-                    <a>
-                      <h4 className="text-2xl font-semibold">Daftar Sekarang</h4>
-                    </a>
-                  </Link>
+                  <a onClick={_ => setShowNavClass(!showNavClass)}>
+                    <h4 className="text-2xl font-semibold">Daftar Sekarang</h4>
+                  </a>
                 </div>
+                {
+                  showNavClass && (
+                    <div>
+                      <div className="px-4 pt-2">
+                        <Link href="/register/student">
+                          <a>
+                            <h4 className="text-xl font-semibold">Kelas Privat</h4>
+                          </a>
+                        </Link>
+                      </div>
+                      <div className="px-4 pt-2">
+                        <Link href="/register/online">
+                          <a>
+                            <h4 className="text-xl font-semibold">Kelas Online</h4>
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  )
+                }
                 <div className="px-4 pt-6">
                   <Link href="/pricing">
                     <a>

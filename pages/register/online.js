@@ -1,14 +1,10 @@
 import Nav from '../../components/Nav'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Footer from '../../components/Footer'
-import InputSchedule from '../../components/InputSchedule'
-import ReactDropdown from 'react-dropdown'
-import { province, capitalize } from '../../utils/common'
 import Link from 'next/link'
 import Axios from 'axios'
 import Head from 'next/head'
-
-const gpaRegex = /^([0-4]\.\d\d)$/
+import { useRouter } from 'next/router'
 
 const default_subjects = [
   'Calistung',
@@ -24,11 +20,11 @@ const default_subjects = [
 ]
 
 const RegisterOnline = ({ footer }) => {
-  console.log(footer)
+  const router = useRouter()
   const msg = encodeURI(`Saya ingin tanya mengenai bimbel Electrum`)
 
   const [form, setForm] = useState({
-    fullname: '',
+    fullname: router.query.fullname || '',
     schoolName: '',
     phoneNumber: '',
     email: '',

@@ -90,7 +90,7 @@ export default function Home({ company, teams, footer }) {
       </div>
       <div className="bg-primary-navy">
         <div className="max-w-6xl m-auto px-4 py-16">
-          <h4 className="text-3xl font-bold text-white">Tertarik untuk belajar di Bimbel Electrum? Daftar Sekarang!</h4>
+          <h4 className="text-3xl font-bold text-white text-center">Tertarik untuk belajar di Bimbel Electrum? Daftar Sekarang!</h4>
           <FooterCTA />
         </div>
       </div>

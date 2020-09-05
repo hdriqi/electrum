@@ -262,7 +262,7 @@ export default function Home({ data, footer }) {
       </div>
       <div className="bg-primary-navy">
         <div className="max-w-6xl m-auto px-4 py-16">
-          <h4 className="text-3xl font-bold text-white">Pendaftaran Siswa</h4>
+          <h4 className="text-3xl font-bold text-white text-center">Pendaftaran Siswa</h4>
           <FooterCTA />
         </div>
       </div>

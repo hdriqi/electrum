@@ -188,7 +188,7 @@ const RegisterOnline = ({ footer }) => {
         </div>
         <div className="mt-6">
           <h4 className="text-xl font-bold">Jadwal Kelas Online</h4>
-          <p className="mt-3">Lihat jadwal kelas online <a target="_blank" href={footer.onlineClassTermsAndConditionsFile} className="underline cursor-pointer font-bold">disini</a></p>
+          <p className="mt-3">Lihat jadwal kelas online <a target="_blank" href={footer.onlineClassSchedule} className="underline cursor-pointer font-bold">disini</a></p>
         </div>
         <div className="mt-8">
           <div>

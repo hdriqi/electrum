@@ -31,13 +31,6 @@ const Nav = ({ footer }) => {
             <div className="hidden lg:block">
               <div className="flex items-center pl-8">
                 <div className="pr-4">
-                  <Link href="/register/online">
-                    <a>
-                      <h4 className="text-sm">Kelas Online</h4>
-                    </a>
-                  </Link>
-                </div>
-                <div className="pr-4">
                   <Link href="/about">
                     <a>
                       <h4 className="text-sm">Tentang Kami</h4>
@@ -69,6 +62,13 @@ const Nav = ({ footer }) => {
                   <Link href="/blog">
                     <a>
                       <h4 className="text-sm">Berita & Event</h4>
+                    </a>
+                  </Link>
+                </div>
+                <div className="pr-4">
+                  <Link href="/register/online">
+                    <a>
+                      <h4 className="text-sm">Kelas Online</h4>
                     </a>
                   </Link>
                 </div>

@@ -7,12 +7,6 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 const default_subjects = [
-  'Calistung',
-  'Matematika SD',
-  'IPA SD',
-  'IPS SD',
-  'Matematika SMP',
-  'IPA SMP',
   'Matematika SMA',
   'Fisika SMA',
   'Kimia SMA',

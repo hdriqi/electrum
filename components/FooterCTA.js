@@ -24,7 +24,7 @@ const FooterCTA = () => {
         <div className="w-full px-3 pt-4">
           <label className="block text-lg text-white font-semibold">Kelas</label>
           <ReactDropdown options={[
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'Alumni SMA'
           ]} value={form.class} onChange={opt => updateForm('class', opt.value)} placeholder="Kelas" controlClassName="w-full mt-2 rounded-md overflow-hidden bg-gray-200 border-none" />
         </div>
       </div>
@@ -36,7 +36,7 @@ const FooterCTA = () => {
             class: form.class
           }
         }} as={`/register/student`}>
-          <button className="text-lg bg-primary-green px-4 py-2 rounded-md w-full font-semibold">Daftar Kelas Privat</button>
+          <button disabled={!(form.fullname.length > 0 && form.class.length > 0)} className="text-lg bg-primary-green px-4 py-2 rounded-md w-full font-semibold">Daftar Kelas Privat</button>
         </Link>
         <p className="text-center text-lg text-white py-2">atau</p>
         <Link href={{
@@ -45,8 +45,9 @@ const FooterCTA = () => {
             fullname: form.fullname
           }
         }} as={`/register/online`}>
-          <button className="text-lg bg-primary-green px-4 py-2 rounded-md w-full font-semibold">Daftar Kelas Online</button>
+          <button disabled={!(form.fullname.length > 0 && (form.class === '12' || form.class === 'Alumni SMA'))} className="text-lg bg-primary-green px-4 py-2 rounded-md w-full font-semibold">Daftar Kelas Online</button>
         </Link>
+        <p className="text-white mt-3">*Kelas online khusus <b>Kelas 12</b> dan <b>Alumni SMA</b></p>
       </div>
     </div>
   )

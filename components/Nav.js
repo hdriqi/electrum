@@ -65,13 +65,13 @@ const Nav = ({ footer }) => {
                     </a>
                   </Link>
                 </div>
-                <div className="pr-4">
+                {/* <div className="pr-4">
                   <Link href="/register/online">
                     <a>
                       <h4 className="text-sm">Kelas Online</h4>
                     </a>
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -146,13 +146,13 @@ const Nav = ({ footer }) => {
                           </a>
                         </Link>
                       </div>
-                      <div className="px-4 pt-2">
+                      {/* <div className="px-4 pt-2">
                         <Link href="/register/online">
                           <a>
                             <h4 className="text-xl font-semibold">Kelas Online</h4>
                           </a>
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   )
                 }

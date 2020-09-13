@@ -38,7 +38,7 @@ const FooterCTA = () => {
         }} as={`/register/student`}>
           <button disabled={!(form.fullname.length > 0 && form.class.length > 0)} className="text-lg bg-primary-green px-4 py-2 rounded-md w-full font-semibold">Daftar Kelas Privat</button>
         </Link>
-        <p className="text-center text-lg text-white py-2">atau</p>
+        {/* <p className="text-center text-lg text-white py-2">atau</p>
         <Link href={{
           pathname: '/register/online',
           query: {
@@ -47,7 +47,7 @@ const FooterCTA = () => {
         }} as={`/register/online`}>
           <button disabled={!(form.fullname.length > 0 && (form.class === '12' || form.class === 'Alumni SMA'))} className="text-lg bg-primary-green px-4 py-2 rounded-md w-full font-semibold">Daftar Kelas Online</button>
         </Link>
-        <p className="text-white mt-3">*Kelas online khusus <b>Kelas 12</b> dan <b>Alumni SMA</b></p>
+        <p className="text-white mt-3">*Kelas online khusus <b>Kelas 12</b> dan <b>Alumni SMA</b></p> */}
       </div>
     </div>
   )
